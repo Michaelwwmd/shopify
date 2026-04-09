@@ -104,6 +104,18 @@
     });
   }
 
+  /* ---------- Discount ribbon dismiss ---------- */
+  function initRibbon(section) {
+    const ribbon = section.querySelector('[data-synergy-ribbon]');
+    if (!ribbon) return;
+    const close = ribbon.querySelector('[data-synergy-ribbon-close]');
+    if (!close) return;
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      ribbon.classList.add('is-hidden');
+    });
+  }
+
   /* ---------- Quantity input ---------- */
   function initQty(section) {
     const field = section.querySelector('[data-synergy-qty]');
@@ -143,6 +155,7 @@
       initGallery(section);
       initVariantPicker(section);
       initQty(section);
+      initRibbon(section);
     });
     document.querySelectorAll('[data-section-type="product-description-features"]').forEach(initTabs);
   }

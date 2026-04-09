@@ -3,45 +3,68 @@
     "main": {
       "type": "main-product-synergy",
       "settings": {
-        "image_badge_label": "NEW",
+        "image_badge_label": "",
         "review_rating": 4.7,
-        "review_count_text": "147 reviews",
-        "tax_shipping_text": "Tax included. Shipping calculated at checkout.",
+        "review_count_text": "137 reviews",
         "enable_installments": true,
-        "installment_brand": "Shop Pay",
-        "short_description": "<p>Introducing the <strong>all-new Bomber Synergy Edge</strong> — our most advanced cornhole bag ever. Patented Edge Technology stitching gives you two distinct playing surfaces for unmatched control, on any board and in any weather.</p>",
         "atc_label": "ADD TO CART",
-        "atc_sublabel": "GET AN EDGE",
-        "enable_payment_button": true,
+        "discount_ribbon_label": "GET 20% OFF",
+        "enable_payment_button": false,
         "show_vendor": false,
         "show_sku": true,
         "show_stock": true,
-        "enable_complete_your_set": true,
-        "complete_your_set_heading": "COMPLETE YOUR SET"
-      },
-      "blocks": {
-        "trust-1": {
-          "type": "trust_icon",
-          "settings": { "label": "FREE SHIPPING OVER $50" }
-        },
-        "trust-2": {
-          "type": "trust_icon",
-          "settings": { "label": "OFFICIALLY ACA APPROVED" }
-        },
-        "trust-3": {
-          "type": "trust_icon",
-          "settings": { "label": "30-DAY MONEY-BACK GUARANTEE" }
-        }
-      },
-      "block_order": ["trust-1", "trust-2", "trust-3"]
+        "enable_safe_checkout": true,
+        "safe_checkout_label": "GUARANTEED SAFE CHECKOUT",
+        "enable_share": true
+      }
     },
     "description": {
       "type": "product-description-features",
       "settings": {
+        "tabs_enabled": true,
+        "description_tab_label": "Description",
         "description_heading": "BOMBER SYNERGY EDGE CORNHOLE BAGS",
+        "description_subheading": "BOMBER SYNERGY EDGE CORNHOLE BAGS \u2013 PROFESSIONAL DUAL-SIDED CORNHOLE BAGS WITH EDGE TECH",
+        "description_eyebrow": "OFFICIAL TOURNAMENT CORNHOLE BAGS \u2013 MADE & ENDORSED BY THE AMERICAN CORNHOLE ASSOCIATION",
+        "description_body": "<p>Take your cornhole game to the next level with Bomber Synergy Edge Cornhole Bags, featuring patented <strong>EDGE Tech construction</strong> (Patent Pending) for superior control, blocking, and shot accuracy. These dual-sided, regulation-size cornhole bags are designed for both precision and speed, with a <strong>microsuede slow side</strong> for grip and a <strong>poly turbo weave fast side</strong> for smooth slides. The innovative three-piece construction creates a flatter landing surface for <strong>even weight distribution</strong>, improving shot consistency. Show off your bold style with the Bomber Synergy Edge cornhole bags, featuring a striking design that brings attitude to every toss.</p>",
         "features_heading": "KEY FEATURES:",
-        "tabs_enabled": true
-      }
+        "closing_paragraph": "<p><strong>Designed for players of all levels,</strong> Synergy Edge Cornhole Bags bring professional performance to backyard games, tournaments, and competitive play. Whether you're blocking your opponent or landing the perfect airmail shot, these innovative cornhole bags deliver precision, durability, and unmatched gameplay.</p>",
+        "enable_complete_your_set": true,
+        "complete_your_set_heading": "COMPLETE YOUR SET"
+      },
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "feature_text": "Officially approved cornhole bags by the American Cornhole Association (ACA)" } },
+        "f2": { "type": "feature", "settings": { "feature_text": "Designed for precision and consistency, Bomber Synergy Edge cornhole bags offer a reliable feel and standout style on the boards." } },
+        "f3": { "type": "feature", "settings": { "feature_text": "Dual-sided performance: Grip with microsuede, slide with poly turbo weave" } },
+        "f4": { "type": "feature", "settings": { "feature_text": "EDGE Tech patented construction enhances blocking, pushing, and control" } },
+        "f5": { "type": "feature", "settings": { "feature_text": "Flat design for even filling dispersion \u2013 no more unpredictable landings" } },
+        "f6": { "type": "feature", "settings": { "feature_text": "Resin-filled for all-weather durability \u2013 lasts longer than traditional cornhole bags" } },
+        "f7": { "type": "feature", "settings": { "feature_text": "Double reinforced stitching ensures a long-lasting, tournament-quality build" } },
+        "f8": { "type": "feature", "settings": { "feature_text": "Regulation size & weight: 6in x 6in and ACA-compliant" } },
+        "upsell1": {
+          "type": "upsell_product",
+          "settings": {
+            "rating": 4.8,
+            "review_count_text": "31 reviews",
+            "title": "Vintage Stripes Backyard 2400 Cornhole Boards",
+            "price": "$240.00",
+            "link": "#"
+          }
+        },
+        "upsell2": {
+          "type": "upsell_product",
+          "settings": {
+            "rating": 5,
+            "review_count_text": "58 reviews",
+            "title": "Cornhole Bags Carrying Tote",
+            "price": "$7.95",
+            "link": "#"
+          }
+        },
+        "tab-specs": { "type": "tab", "settings": { "tab_label": "Specs", "tab_content": "<p>Add specs content here.</p>" } },
+        "tab-scale": { "type": "tab", "settings": { "tab_label": "Scale", "tab_content": "<p>Add scale/sizing content here.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "upsell1", "upsell2", "tab-specs", "tab-scale"]
     },
     "models-grid": {
       "type": "product-models-grid",
