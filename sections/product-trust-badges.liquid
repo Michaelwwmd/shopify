@@ -1,0 +1,64 @@
+{%- comment -%}
+  Trust badges row (3 columns: Edge Technology, ACA approved, 30 Day Satisfaction)
+{%- endcomment -%}
+
+<section
+  class="synergy-badges"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-trust-badges"
+>
+  <div class="page-width">
+    <div class="synergy-badges__row">
+      {%- for block in section.blocks -%}
+        <div class="synergy-badges__item" {{ block.shopify_attributes }}>
+          <div class="synergy-badges__icon">
+            {%- if block.settings.icon != blank -%}
+              {{ block.settings.icon | image_url: width: 180 | image_tag: loading: 'lazy', alt: block.settings.label | escape }}
+            {%- endif -%}
+          </div>
+          <p class="synergy-badges__label">{{ block.settings.label }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy Trust Badges",
+  "tag": "section",
+  "class": "section-synergy-badges",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "EDGE TECHNOLOGY"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Synergy Trust Badges",
+      "category": "Product",
+      "blocks": [
+        { "type": "badge", "settings": { "label": "EDGE TECHNOLOGY" } },
+        { "type": "badge", "settings": { "label": "OFFICIAL ACA APPROVAL" } },
+        { "type": "badge", "settings": { "label": "30 DAY RISK-FREE 100% SATISFACTION GUARANTEE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

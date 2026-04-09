@@ -1,0 +1,145 @@
+{%- comment -%}
+  Product description + key features (checkmark list) with tabs.
+{%- endcomment -%}
+
+<section
+  class="synergy-description page-width"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-description-features"
+>
+  {%- if section.settings.tabs_enabled -%}
+    <div class="synergy-tabs" data-synergy-tabs>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tab' -%}
+          <button
+            type="button"
+            class="synergy-tabs__btn{% if forloop.first %} is-active{% endif %}"
+            data-tab-target="tab-{{ block.id }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_label | upcase }}
+          </button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="synergy-description__panels">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'tab' -%}
+        <div
+          class="synergy-description__panel{% if forloop.first %} is-active{% endif %}"
+          id="tab-{{ block.id }}"
+          data-tab-panel="tab-{{ block.id }}"
+        >
+          {{ block.settings.tab_content }}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment -%} Default description panel (first tab) {%- endcomment -%}
+    <div
+      class="synergy-description__panel is-active"
+      data-tab-panel="default"
+    >
+      <h2 class="synergy-description__heading">{{ section.settings.description_heading }}</h2>
+      <div class="synergy-description__body rte">
+        {{ product.description }}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <h3 class="synergy-description__features-heading">{{ section.settings.features_heading }}</h3>
+        <ul class="synergy-features">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature' -%}
+              <li class="synergy-features__item" {{ block.shopify_attributes }}>
+                <span class="synergy-features__check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path d="M20.3 5.7a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.4L9.6 15 18.9 5.7a1 1 0 0 1 1.4 0z" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span class="synergy-features__text">{{ block.settings.feature_text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy Description",
+  "tag": "section",
+  "class": "section-synergy-description",
+  "settings": [
+    {
+      "type": "text",
+      "id": "description_heading",
+      "label": "Description heading",
+      "default": "BOMBER SYNERGY EDGE CORNHOLE BAGS"
+    },
+    {
+      "type": "text",
+      "id": "features_heading",
+      "label": "Features heading",
+      "default": "KEY FEATURES:"
+    },
+    {
+      "type": "checkbox",
+      "id": "tabs_enabled",
+      "label": "Enable tabs row",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text",
+          "default": "Officially approved cornhole bags by the American Cornhole Association (ACA)"
+        }
+      ]
+    },
+    {
+      "type": "tab",
+      "name": "Tab (optional)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "Specs"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_content",
+          "label": "Tab content",
+          "default": "<p>Add your tab content here.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Synergy Description",
+      "category": "Product",
+      "blocks": [
+        { "type": "feature", "settings": { "feature_text": "Officially approved cornhole bags by the American Cornhole Association (ACA)" } },
+        { "type": "feature", "settings": { "feature_text": "Designed for precision and accuracy: Bomber Synergy Edge cornhole bags offer extra slick and stick on both sides of the bag" } },
+        { "type": "feature", "settings": { "feature_text": "Dual shielded fabric: Slick side and Stick side, with patented Edge stitching" } },
+        { "type": "feature", "settings": { "feature_text": "EDGE Tech patented seam edge allows for a more consistent grip and release" } },
+        { "type": "feature", "settings": { "feature_text": "All-weather, Moisture & UV resistant, Won't fade, Sustainable Performance" } },
+        { "type": "feature", "settings": { "feature_text": "Weather Effective: All-weather durability. Non-reactive; won't stiffen in cold weather" } },
+        { "type": "feature", "settings": { "feature_text": "Double stitched seams and strong, lightweight material for all-weather performance" } },
+        { "type": "feature", "settings": { "feature_text": "Regulation size & weight: 6 in x 6 in square, filled with regulation-weight resin pellets" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

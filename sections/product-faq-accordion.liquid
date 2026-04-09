@@ -1,0 +1,83 @@
+{%- comment -%}
+  FAQ accordion with expandable items.
+{%- endcomment -%}
+
+<section
+  class="synergy-faq page-width"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-faq-accordion"
+>
+  <h2 class="synergy-faq__heading">{{ section.settings.heading }}</h2>
+
+  <div class="synergy-faq__list" data-synergy-faq>
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'faq_item' -%}
+        <details class="synergy-faq__item" {{ block.shopify_attributes }}>
+          <summary class="synergy-faq__question">
+            <span class="synergy-faq__question-text">{{ block.settings.question }}</span>
+            <span class="synergy-faq__toggle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="synergy-faq__answer rte">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy FAQ",
+  "tag": "section",
+  "class": "section-synergy-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQ"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is your question?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Your answer here.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Synergy FAQ",
+      "category": "Product",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "What makes the Synergy Edge so Special/Different?" } },
+        { "type": "faq_item", "settings": { "question": "When is the Synergy Edge best used?" } },
+        { "type": "faq_item", "settings": { "question": "How does the patented Edge Band work?" } },
+        { "type": "faq_item", "settings": { "question": "How did the Synergy Edge get its name?" } },
+        { "type": "faq_item", "settings": { "question": "Is the Synergy Edge good for beginning cornhole players?" } },
+        { "type": "faq_item", "settings": { "question": "Are Bomber Edge bags ACA approved?" } },
+        { "type": "faq_item", "settings": { "question": "What kind of warranty do Synergy Edge bags have?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

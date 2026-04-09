@@ -1,0 +1,293 @@
+{{ 'custom-synergy.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-synergy.js' | asset_url }}" defer="defer"></script>
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section
+  class="synergy-product"
+  data-section-id="{{ section.id }}"
+  data-section-type="main-product-synergy"
+>
+  <div class="synergy-product__wrapper page-width">
+    {%- comment -%} ---- Gallery ---- {%- endcomment -%}
+    <div class="synergy-product__gallery">
+      <div class="synergy-gallery" data-synergy-gallery>
+        <div class="synergy-gallery__thumbs" data-synergy-thumbs>
+          {%- for media in product.media -%}
+            <button
+              type="button"
+              class="synergy-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+              data-index="{{ forloop.index0 }}"
+              aria-label="{{ media.alt | default: product.title | escape }}"
+            >
+              {%- if media.media_type == 'image' -%}
+                {{ media | image_url: width: 160 | image_tag: loading: 'lazy', alt: media.alt | escape }}
+              {%- else -%}
+                {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: media.alt | escape }}
+              {%- endif -%}
+            </button>
+          {%- endfor -%}
+        </div>
+
+        <div class="synergy-gallery__stage" data-synergy-stage>
+          {%- for media in product.media -%}
+            <div
+              class="synergy-gallery__slide{% if forloop.first %} is-active{% endif %}"
+              data-index="{{ forloop.index0 }}"
+            >
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  {{
+                    media
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'eager',
+                      widths: '480, 720, 960, 1200, 1600',
+                      sizes: '(min-width: 990px) 55vw, 100vw',
+                      alt: media.alt | escape
+                  }}
+                {%- when 'video' -%}
+                  {{ media | video_tag: controls: true, image_size: '1200x' }}
+                {%- when 'external_video' -%}
+                  {{ media | external_video_tag }}
+                {%- else -%}
+                  {{ media | image_url: width: 1200 | image_tag: alt: media.alt | escape }}
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} ---- Product Info ---- {%- endcomment -%}
+    <div class="synergy-product__info">
+      {%- if section.settings.show_vendor and product.vendor != blank -%}
+        <p class="synergy-product__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <h1 class="synergy-product__title">{{ product.title | upcase }}</h1>
+
+      {%- comment -%} ---- Star rating placeholder ---- {%- endcomment -%}
+      <div class="synergy-product__rating">
+        <div class="synergy-stars" aria-label="Rated 4.5 out of 5">
+          <span class="synergy-stars__fill" style="width: 90%;"></span>
+        </div>
+        <a href="#synergy-reviews" class="synergy-product__rating-count">
+          {{ product.metafields.reviews.rating_count | default: '147 reviews' }}
+        </a>
+      </div>
+
+      <div class="synergy-product__price">
+        <span class="synergy-product__price-current">
+          {{ current_variant.price | money }}
+        </span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="synergy-product__price-compare">
+            {{ current_variant.compare_at_price | money }}
+          </span>
+          <span class="synergy-product__price-save">
+            Save
+            {{- current_variant.compare_at_price | minus: current_variant.price | money }}
+          </span>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---- Variant form ---- {%- endcomment -%}
+      {%- form 'product', product, class: 'synergy-product__form', id: 'synergy-product-form', novalidate: 'novalidate' -%}
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="synergy-product__option" data-option-index="{{ forloop.index0 }}">
+              <label class="synergy-product__option-label">
+                {{ option.name }}:
+                <span class="synergy-product__option-value" data-option-value="{{ forloop.index0 }}">
+                  {{ option.selected_value }}
+                </span>
+              </label>
+              <div class="synergy-product__swatches" data-option-swatches>
+                {%- for value in option.values -%}
+                  {%- assign is_color = false -%}
+                  {%- assign lower_name = option.name | downcase -%}
+                  {%- if lower_name contains 'color' or lower_name contains 'colour' -%}
+                    {%- assign is_color = true -%}
+                  {%- endif -%}
+                  <button
+                    type="button"
+                    class="synergy-swatch{% if option.selected_value == value %} is-active{% endif %}{% if is_color %} is-color{% endif %}"
+                    data-option-index="{{ forloop.parentloop.index0 }}"
+                    data-option-value="{{ value | escape }}"
+                    {% if is_color %}style="background-color: {{ value | handle }};"{% endif %}
+                    aria-label="{{ option.name }}: {{ value }}"
+                  >
+                    {%- unless is_color -%}{{ value }}{%- endunless -%}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <select name="id" class="synergy-product__variant-select" data-synergy-variant-select hidden>
+          {%- for variant in product.variants -%}
+            <option
+              value="{{ variant.id }}"
+              {% if variant == current_variant %}selected="selected"{% endif %}
+              {% unless variant.available %}disabled{% endunless %}
+              data-price="{{ variant.price | money }}"
+              data-compare-price="{{ variant.compare_at_price | money }}"
+              data-available="{{ variant.available }}"
+            >
+              {{ variant.title }}
+            </option>
+          {%- endfor -%}
+        </select>
+
+        <div class="synergy-product__qty-row">
+          <div class="synergy-product__qty">
+            <label class="synergy-product__qty-label" for="synergy-quantity">Qty:</label>
+            <div class="synergy-qty-input">
+              <button type="button" class="synergy-qty-input__btn" data-qty-action="decrement" aria-label="Decrease quantity">&minus;</button>
+              <input
+                type="number"
+                id="synergy-quantity"
+                name="quantity"
+                value="1"
+                min="1"
+                class="synergy-qty-input__field"
+                data-synergy-qty
+              >
+              <button type="button" class="synergy-qty-input__btn" data-qty-action="increment" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            name="add"
+            class="synergy-product__atc btn"
+            data-synergy-atc
+            {% unless current_variant.available %}disabled{% endunless %}
+          >
+            <span class="synergy-product__atc-text">
+              {%- if current_variant.available -%}
+                ADD TO CART
+              {%- else -%}
+                SOLD OUT
+              {%- endif -%}
+            </span>
+          </button>
+        </div>
+
+        {%- if section.settings.enable_payment_button -%}
+          {{ form | payment_button }}
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.show_sku -%}
+        <p class="synergy-product__sku">SKU: {{ current_variant.sku }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ---- Complete Your Set ---- {%- endcomment -%}
+    {%- if section.settings.enable_complete_your_set -%}
+      <aside class="synergy-product__upsell">
+        <h3 class="synergy-product__upsell-heading">
+          {{ section.settings.complete_your_set_heading }}
+        </h3>
+        <div class="synergy-product__upsell-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'upsell_product' -%}
+              {%- assign upsell = all_products[block.settings.product] -%}
+              {%- if upsell != blank -%}
+                <a href="{{ upsell.url }}" class="synergy-upsell-card" {{ block.shopify_attributes }}>
+                  <div class="synergy-upsell-card__image">
+                    {%- if upsell.featured_image -%}
+                      {{ upsell.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: upsell.title | escape }}
+                    {%- endif -%}
+                  </div>
+                  <div class="synergy-upsell-card__body">
+                    <p class="synergy-upsell-card__title">{{ upsell.title }}</p>
+                    <div class="synergy-upsell-card__rating">
+                      <div class="synergy-stars synergy-stars--sm">
+                        <span class="synergy-stars__fill" style="width: 100%;"></span>
+                      </div>
+                    </div>
+                    <p class="synergy-upsell-card__price">{{ upsell.price | money }}</p>
+                  </div>
+                </a>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </aside>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy Product",
+  "tag": "section",
+  "class": "section-synergy-product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Show SKU",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_payment_button",
+      "label": "Enable dynamic checkout button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Complete Your Set"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_complete_your_set",
+      "label": "Enable upsell column",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "complete_your_set_heading",
+      "label": "Heading",
+      "default": "COMPLETE YOUR SET"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "upsell_product",
+      "name": "Upsell product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Synergy Product",
+      "category": "Product"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

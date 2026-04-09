@@ -1,0 +1,92 @@
+{%- comment -%}
+  "NEW! Game Changing Edge Technology" 4-column feature section with image cards.
+{%- endcomment -%}
+
+<section
+  class="synergy-features-grid"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-feature-columns"
+>
+  <div class="page-width">
+    <h2 class="synergy-features-grid__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="synergy-features-grid__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <div class="synergy-features-grid__row">
+      {%- for block in section.blocks -%}
+        <div class="synergy-features-grid__item" {{ block.shopify_attributes }}>
+          <div class="synergy-features-grid__image">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
+            {%- endif -%}
+          </div>
+          <h3 class="synergy-features-grid__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.description != blank -%}
+            <p class="synergy-features-grid__desc">{{ block.settings.description }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy Feature Columns",
+  "tag": "section",
+  "class": "section-synergy-features-grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "NEW! GAME CHANGING EDGE TECHNOLOGY"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Bomber Synergy Edge bags give you the edge with Edge Technology stitching."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "DUAL-TONE GRIP BACK"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Custom finishes in Sahara color so you'll always know which side is up."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Synergy Feature Columns",
+      "category": "Product",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "DUAL-TONE GRIP BACK" } },
+        { "type": "feature", "settings": { "title": "A 90 BREAK BAG AND A SLIDE" } },
+        { "type": "feature", "settings": { "title": "COMFORTABLE RELEASE, LANDS FIRST PLAY" } },
+        { "type": "feature", "settings": { "title": "BUILT FOR THE FINAL WORD" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

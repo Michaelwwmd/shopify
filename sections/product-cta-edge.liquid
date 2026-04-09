@@ -1,0 +1,70 @@
+{%- comment -%}
+  "GET AN EDGE OVER THE COMPETITION" CTA banner with background image.
+{%- endcomment -%}
+
+<section
+  class="synergy-cta"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-cta-edge"
+>
+  <div class="synergy-cta__media">
+    {%- if section.settings.background_image != blank -%}
+      {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: section.settings.heading | escape }}
+    {%- endif -%}
+    <div class="synergy-cta__overlay"></div>
+  </div>
+  <div class="synergy-cta__content page-width">
+    <h2 class="synergy-cta__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.description != blank -%}
+      <p class="synergy-cta__description">{{ section.settings.description }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link }}" class="synergy-cta__button btn">
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy CTA Banner",
+  "tag": "section",
+  "class": "section-synergy-cta",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "GET AN EDGE OVER THE COMPETITION"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Synergy CTA Banner",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

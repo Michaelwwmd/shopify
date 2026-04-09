@@ -1,0 +1,128 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product-synergy",
+      "settings": {
+        "show_vendor": false,
+        "show_sku": false,
+        "enable_payment_button": true,
+        "enable_complete_your_set": true,
+        "complete_your_set_heading": "COMPLETE YOUR SET"
+      }
+    },
+    "description": {
+      "type": "product-description-features",
+      "settings": {
+        "description_heading": "BOMBER SYNERGY EDGE CORNHOLE BAGS",
+        "features_heading": "KEY FEATURES:",
+        "tabs_enabled": true
+      }
+    },
+    "models-grid": {
+      "type": "product-models-grid",
+      "settings": {
+        "heading": "SHOP PRO BOARD MODELS"
+      }
+    },
+    "trust-badges": {
+      "type": "product-trust-badges",
+      "settings": {}
+    },
+    "edge-banner": {
+      "type": "product-edge-banner",
+      "settings": {
+        "heading": "INTRODUCING THE NEW",
+        "subheading": "SYNERGY EDGE"
+      }
+    },
+    "feature-columns": {
+      "type": "product-feature-columns",
+      "settings": {
+        "heading": "NEW! GAME CHANGING EDGE TECHNOLOGY",
+        "subheading": "Bomber Synergy Edge bags give you the edge with Edge Technology stitching. Shop the Synergy Edge Cornhole Bags for your chance to experience the new difference in bag technology."
+      }
+    },
+    "cta-banner": {
+      "type": "product-cta-edge",
+      "settings": {
+        "heading": "GET AN EDGE OVER THE COMPETITION",
+        "description": "With as many as four Edge sides to choose from, the Synergy Edge brings a new level of bag customization and control to cornhole competitions.",
+        "button_label": "SHOP NOW",
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "faq": {
+      "type": "product-faq-accordion",
+      "settings": {
+        "heading": "FAQ"
+      },
+      "blocks": {
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes the Synergy Edge so Special/Different?",
+            "answer": "<p>The Synergy Edge features Edge Technology stitching that creates two distinct playing surfaces on each side of the bag, giving players unprecedented control over speed and stick.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When is the Synergy Edge best used?",
+            "answer": "<p>The Synergy Edge is ideal for competitive play where precision and control are essential. It performs in any weather condition.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the patented Edge Band work?",
+            "answer": "<p>The patented Edge Band provides an extra grip zone on the bag that allows for more consistent release and improved bag trajectory.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How did the Synergy Edge get its name?",
+            "answer": "<p>The name Synergy Edge reflects the combination of premium materials working in harmony with the new patented edge stitching technology.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is the Synergy Edge good for beginning cornhole players?",
+            "answer": "<p>Absolutely. While the Synergy Edge is a competitive-level bag, the dual-surface design helps beginners learn control faster.</p>"
+          }
+        },
+        "q6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are Bomber Edge bags ACA approved?",
+            "answer": "<p>Yes. All Bomber Synergy Edge bags are ACA (American Cornhole Association) approved for all sanctioned events.</p>"
+          }
+        },
+        "q7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What kind of warranty do Synergy Edge bags have?",
+            "answer": "<p>Bomber Synergy Edge bags come with a 30-day risk-free satisfaction guarantee.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"]
+    },
+    "reviews": {
+      "type": "product-reviews-placeholder",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "description",
+    "models-grid",
+    "trust-badges",
+    "edge-banner",
+    "feature-columns",
+    "cta-banner",
+    "faq",
+    "reviews"
+  ]
+}

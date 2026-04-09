@@ -1,0 +1,52 @@
+{%- comment -%}
+  Reviews anchor — replace with your product reviews app (Judge.me, Yotpo, Shopify Reviews, etc.)
+{%- endcomment -%}
+
+<section
+  id="synergy-reviews"
+  class="synergy-reviews page-width"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-reviews-placeholder"
+>
+  <h2 class="synergy-reviews__heading">{{ section.settings.heading }}</h2>
+
+  {%- if section.settings.app_snippet != blank -%}
+    {%- render section.settings.app_snippet -%}
+  {%- else -%}
+    {%- comment -%}
+      Default: render Shopify Product Reviews or Judge.me embed if present on the product page.
+    {%- endcomment -%}
+    <div class="synergy-reviews__widget">
+      <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+      <div class="jdgm-widget jdgm-review-widget" data-id="{{ product.id }}"></div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Synergy Reviews",
+  "tag": "section",
+  "class": "section-synergy-reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "text",
+      "id": "app_snippet",
+      "label": "Custom reviews snippet name",
+      "info": "If you have a reviews app snippet, enter its name here."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Synergy Reviews",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
