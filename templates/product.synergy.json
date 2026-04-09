@@ -3,12 +3,37 @@
     "main": {
       "type": "main-product-synergy",
       "settings": {
-        "show_vendor": false,
-        "show_sku": false,
+        "image_badge_label": "NEW",
+        "review_rating": 4.7,
+        "review_count_text": "147 reviews",
+        "tax_shipping_text": "Tax included. Shipping calculated at checkout.",
+        "enable_installments": true,
+        "installment_brand": "Shop Pay",
+        "short_description": "<p>Introducing the <strong>all-new Bomber Synergy Edge</strong> — our most advanced cornhole bag ever. Patented Edge Technology stitching gives you two distinct playing surfaces for unmatched control, on any board and in any weather.</p>",
+        "atc_label": "ADD TO CART",
+        "atc_sublabel": "GET AN EDGE",
         "enable_payment_button": true,
+        "show_vendor": false,
+        "show_sku": true,
+        "show_stock": true,
         "enable_complete_your_set": true,
         "complete_your_set_heading": "COMPLETE YOUR SET"
-      }
+      },
+      "blocks": {
+        "trust-1": {
+          "type": "trust_icon",
+          "settings": { "label": "FREE SHIPPING OVER $50" }
+        },
+        "trust-2": {
+          "type": "trust_icon",
+          "settings": { "label": "OFFICIALLY ACA APPROVED" }
+        },
+        "trust-3": {
+          "type": "trust_icon",
+          "settings": { "label": "30-DAY MONEY-BACK GUARANTEE" }
+        }
+      },
+      "block_order": ["trust-1", "trust-2", "trust-3"]
     },
     "description": {
       "type": "product-description-features",

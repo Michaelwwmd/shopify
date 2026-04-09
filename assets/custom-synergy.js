@@ -61,17 +61,33 @@
 
       // Update price
       const atc = form.querySelector('[data-synergy-atc]');
-      const priceEl = section.querySelector('.synergy-product__price-current');
+      const priceEl = section.querySelector('[data-synergy-price]');
       const selectedOpt = select.options[select.selectedIndex];
       if (selectedOpt && priceEl) {
         const price = selectedOpt.getAttribute('data-price');
         if (price) priceEl.textContent = price;
       }
+
+      // Update installment messaging (1/4 of price)
+      const installmentEl = section.querySelector('.synergy-product__installments strong');
+      if (selectedOpt && installmentEl) {
+        const priceStr = selectedOpt.getAttribute('data-price') || '';
+        const numeric = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+        if (!isNaN(numeric)) {
+          const quarter = (numeric / 4).toFixed(2);
+          const symbol = priceStr.match(/^[^0-9.,-]+/);
+          installmentEl.textContent = (symbol ? symbol[0] : '$') + quarter;
+        }
+      }
+
       if (selectedOpt && atc) {
         const available = selectedOpt.getAttribute('data-available') === 'true';
         atc.disabled = !available;
         const atcText = atc.querySelector('.synergy-product__atc-text');
-        if (atcText) atcText.textContent = available ? 'ADD TO CART' : 'SOLD OUT';
+        if (atcText) {
+          const defaultLabel = atc.getAttribute('data-label') || 'ADD TO CART';
+          atcText.textContent = available ? defaultLabel : 'SOLD OUT';
+        }
       }
     }
 
