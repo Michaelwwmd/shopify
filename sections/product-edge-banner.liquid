@@ -7,13 +7,14 @@
   data-section-id="{{ section.id }}"
   data-section-type="product-edge-banner"
   style="
+    background-color: {{ section.settings.bg_color }};
     --seb-bg: {{ section.settings.bg_color }};
     --seb-padding-top: {{ section.settings.padding_top }}px;
     --seb-padding-bottom: {{ section.settings.padding_bottom }}px;
     --seb-eyebrow-size: {{ section.settings.eyebrow_font_size }}px;
     --seb-eyebrow-color: {{ section.settings.eyebrow_color }};
     --seb-eyebrow-weight: {{ section.settings.eyebrow_weight }};
-    --seb-eyebrow-spacing: {{ section.settings.eyebrow_letter_spacing }}em;
+    --seb-eyebrow-spacing: {{ section.settings.eyebrow_letter_spacing }};
     --seb-title-size: {{ section.settings.title_font_size }}px;
     --seb-title-color: {{ section.settings.title_color }};
     --seb-title-weight: {{ section.settings.title_weight }};
@@ -55,7 +56,7 @@
     { "type": "range", "id": "eyebrow_font_size", "label": "Eyebrow font size", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 13 },
     { "type": "select", "id": "eyebrow_weight", "label": "Eyebrow font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }], "default": "400" },
     { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "#cccccc" },
-    { "type": "range", "id": "eyebrow_letter_spacing", "label": "Eyebrow letter spacing", "min": 0, "max": 5, "step": 1, "default": 2 },
+    { "type": "select", "id": "eyebrow_letter_spacing", "label": "Eyebrow letter spacing", "options": [{ "value": "0em", "label": "None" }, { "value": "0.05em", "label": "Tight (0.05em)" }, { "value": "0.1em", "label": "Normal (0.1em)" }, { "value": "0.15em", "label": "Wide (0.15em)" }, { "value": "0.2em", "label": "Wider (0.2em)" }, { "value": "0.3em", "label": "Extra wide (0.3em)" }], "default": "0.2em" },
     { "type": "header", "content": "Headline" },
     { "type": "text", "id": "subheading", "label": "Headline", "default": "SYNERGY EDGE" },
     { "type": "range", "id": "title_font_size", "label": "Headline font size", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 48 },
