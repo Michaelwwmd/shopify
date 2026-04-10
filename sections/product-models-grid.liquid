@@ -1,16 +1,39 @@
 {%- comment -%}
-  "Shop Pro Board Models" grid: 4 product cards with image + title + price.
+  "Shop Pro Board Models" grid with fully customizable typography, colors, and spacing.
 {%- endcomment -%}
 
 <section
   class="synergy-models"
   data-section-id="{{ section.id }}"
   data-section-type="product-models-grid"
+  style="
+    --sm-bg: {{ section.settings.bg_color }};
+    --sm-padding-top: {{ section.settings.padding_top }}px;
+    --sm-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sm-heading-size: {{ section.settings.heading_font_size }}px;
+    --sm-heading-color: {{ section.settings.heading_color }};
+    --sm-heading-weight: {{ section.settings.heading_weight }};
+    --sm-heading-align: {{ section.settings.heading_alignment }};
+    --sm-heading-spacing: {{ section.settings.heading_bottom_spacing }}px;
+    --sm-columns: {{ section.settings.columns_desktop }};
+    --sm-gap: {{ section.settings.column_gap }}px;
+    --sm-image-ratio: {{ section.settings.image_aspect_ratio }};
+    --sm-image-radius: {{ section.settings.image_border_radius }}px;
+    --sm-card-align: {{ section.settings.card_text_alignment }};
+    --sm-title-size: {{ section.settings.card_title_font_size }}px;
+    --sm-title-color: {{ section.settings.card_title_color }};
+    --sm-title-weight: {{ section.settings.card_title_weight }};
+    --sm-price-size: {{ section.settings.card_price_font_size }}px;
+    --sm-price-color: {{ section.settings.card_price_color }};
+    --sm-price-weight: {{ section.settings.card_price_weight }};
+  "
 >
   <div class="page-width">
-    <h2 class="synergy-models__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.heading != blank -%}
+      <h2 class="synergy-models__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
 
-    <div class="synergy-models__grid" data-column-count="{{ section.blocks.size }}">
+    <div class="synergy-models__grid">
       {%- for block in section.blocks -%}
         {%- if block.type == 'model' -%}
           {%- assign model_product = all_products[block.settings.product] -%}
@@ -48,43 +71,41 @@
   "tag": "section",
   "class": "section-synergy-models",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "SHOP PRO BOARD MODELS"
-    }
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 44 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 44 },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "SHOP PRO BOARD MODELS" },
+    { "type": "range", "id": "heading_font_size", "label": "Heading font size", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 22 },
+    { "type": "select", "id": "heading_weight", "label": "Heading font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }, { "value": "900", "label": "Black" }], "default": "800" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#111111" },
+    { "type": "select", "id": "heading_alignment", "label": "Heading alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+    { "type": "range", "id": "heading_bottom_spacing", "label": "Heading bottom spacing", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 28 },
+    { "type": "header", "content": "Grid" },
+    { "type": "range", "id": "columns_desktop", "label": "Columns (desktop)", "min": 1, "max": 6, "step": 1, "default": 4 },
+    { "type": "range", "id": "column_gap", "label": "Column gap", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 20 },
+    { "type": "select", "id": "image_aspect_ratio", "label": "Image aspect ratio", "options": [{ "value": "1/1", "label": "Square (1:1)" }, { "value": "4/3", "label": "Landscape (4:3)" }, { "value": "3/4", "label": "Portrait (3:4)" }, { "value": "auto", "label": "Natural" }], "default": "1/1" },
+    { "type": "range", "id": "image_border_radius", "label": "Image border radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "header", "content": "Card text" },
+    { "type": "select", "id": "card_text_alignment", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+    { "type": "range", "id": "card_title_font_size", "label": "Title font size", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 13 },
+    { "type": "select", "id": "card_title_weight", "label": "Title font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }], "default": "700" },
+    { "type": "color", "id": "card_title_color", "label": "Title color", "default": "#111111" },
+    { "type": "range", "id": "card_price_font_size", "label": "Price font size", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "select", "id": "card_price_weight", "label": "Price font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }], "default": "700" },
+    { "type": "color", "id": "card_price_color", "label": "Price color", "default": "#111111" }
   ],
   "blocks": [
     {
       "type": "model",
       "name": "Model",
       "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product (optional)"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image override"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title override"
-        },
-        {
-          "type": "text",
-          "id": "price_override",
-          "label": "Price override"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link (if no product selected)"
-        }
+        { "type": "product", "id": "product", "label": "Product (optional)" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        { "type": "text", "id": "title", "label": "Title override" },
+        { "type": "text", "id": "price_override", "label": "Price override" },
+        { "type": "url", "id": "link", "label": "Link (if no product selected)" }
       ]
     }
   ],

@@ -1,32 +1,58 @@
 {%- comment -%}
-  FAQ accordion with expandable items.
+  FAQ accordion — fully customizable.
 {%- endcomment -%}
 
 <section
-  class="synergy-faq page-width"
+  class="synergy-faq"
   data-section-id="{{ section.id }}"
   data-section-type="product-faq-accordion"
+  style="
+    --sfaq-bg: {{ section.settings.bg_color }};
+    --sfaq-padding-top: {{ section.settings.padding_top }}px;
+    --sfaq-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sfaq-max-width: {{ section.settings.max_width }}px;
+    --sfaq-heading-size: {{ section.settings.heading_font_size }}px;
+    --sfaq-heading-color: {{ section.settings.heading_color }};
+    --sfaq-heading-weight: {{ section.settings.heading_weight }};
+    --sfaq-heading-align: {{ section.settings.heading_alignment }};
+    --sfaq-heading-spacing: {{ section.settings.heading_bottom_spacing }}px;
+    --sfaq-q-size: {{ section.settings.question_font_size }}px;
+    --sfaq-q-color: {{ section.settings.question_color }};
+    --sfaq-q-weight: {{ section.settings.question_weight }};
+    --sfaq-q-padding: {{ section.settings.question_padding }}px;
+    --sfaq-a-size: {{ section.settings.answer_font_size }}px;
+    --sfaq-a-color: {{ section.settings.answer_color }};
+    --sfaq-a-line-height: {{ section.settings.answer_line_height }};
+    --sfaq-border-color: {{ section.settings.border_color }};
+    --sfaq-icon-color: {{ section.settings.toggle_icon_color }};
+  "
 >
-  <h2 class="synergy-faq__heading">{{ section.settings.heading }}</h2>
-
-  <div class="synergy-faq__list" data-synergy-faq>
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'faq_item' -%}
-        <details class="synergy-faq__item" {{ block.shopify_attributes }}>
-          <summary class="synergy-faq__question">
-            <span class="synergy-faq__question-text">{{ block.settings.question }}</span>
-            <span class="synergy-faq__toggle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="20" height="20">
-                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </summary>
-          <div class="synergy-faq__answer rte">
-            {{ block.settings.answer }}
-          </div>
-        </details>
+  <div class="page-width">
+    <div class="synergy-faq__container">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="synergy-faq__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
-    {%- endfor -%}
+
+      <div class="synergy-faq__list" data-synergy-faq>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq_item' -%}
+            <details class="synergy-faq__item" {{ block.shopify_attributes }}>
+              <summary class="synergy-faq__question">
+                <span class="synergy-faq__question-text">{{ block.settings.question }}</span>
+                <span class="synergy-faq__toggle" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="synergy-faq__answer rte">
+                {{ block.settings.answer }}
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -36,30 +62,37 @@
   "tag": "section",
   "class": "section-synergy-faq",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "FAQ"
-    }
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "max_width", "label": "Content max width", "min": 500, "max": 1200, "step": 50, "unit": "px", "default": 900 },
+    { "type": "color", "id": "border_color", "label": "Divider color", "default": "#e5e7eb" },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "FAQ" },
+    { "type": "range", "id": "heading_font_size", "label": "Heading font size", "min": 18, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "select", "id": "heading_weight", "label": "Heading font weight", "options": [{ "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }, { "value": "900", "label": "Black" }], "default": "900" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#111111" },
+    { "type": "select", "id": "heading_alignment", "label": "Heading alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+    { "type": "range", "id": "heading_bottom_spacing", "label": "Heading bottom spacing", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 30 },
+    { "type": "header", "content": "Questions" },
+    { "type": "range", "id": "question_font_size", "label": "Question font size", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "select", "id": "question_weight", "label": "Question font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }], "default": "600" },
+    { "type": "color", "id": "question_color", "label": "Question color", "default": "#111111" },
+    { "type": "range", "id": "question_padding", "label": "Question vertical padding", "min": 8, "max": 30, "step": 1, "unit": "px", "default": 18 },
+    { "type": "color", "id": "toggle_icon_color", "label": "Toggle icon color", "default": "#111111" },
+    { "type": "header", "content": "Answers" },
+    { "type": "range", "id": "answer_font_size", "label": "Answer font size", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "answer_color", "label": "Answer color", "default": "#444444" },
+    { "type": "select", "id": "answer_line_height", "label": "Answer line height", "options": [{ "value": "1.4", "label": "Tight" }, { "value": "1.6", "label": "Normal" }, { "value": "1.8", "label": "Relaxed" }], "default": "1.6" }
   ],
   "blocks": [
     {
       "type": "faq_item",
       "name": "FAQ item",
       "settings": [
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question",
-          "default": "What is your question?"
-        },
-        {
-          "type": "richtext",
-          "id": "answer",
-          "label": "Answer",
-          "default": "<p>Your answer here.</p>"
-        }
+        { "type": "text", "id": "question", "label": "Question", "default": "What is your question?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Your answer here.</p>" }
       ]
     }
   ],

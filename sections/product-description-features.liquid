@@ -1,12 +1,40 @@
 {%- comment -%}
   Product description + key features with tabs (left column) alongside
   the "Complete Your Set" upsell column (right column).
+  All typography, colors, and spacing are customizable via the theme editor.
 {%- endcomment -%}
 
 <section
   class="synergy-description"
   data-section-id="{{ section.id }}"
   data-section-type="product-description-features"
+  style="
+    --sd-bg: {{ section.settings.bg_color }};
+    --sd-padding-top: {{ section.settings.padding_top }}px;
+    --sd-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sd-tab-size: {{ section.settings.tab_font_size }}px;
+    --sd-tab-color: {{ section.settings.tab_color }};
+    --sd-tab-active-color: {{ section.settings.tab_active_color }};
+    --sd-tab-border-color: {{ section.settings.tab_active_color }};
+    --sd-heading-size: {{ section.settings.heading_font_size }}px;
+    --sd-heading-color: {{ section.settings.heading_color }};
+    --sd-heading-weight: {{ section.settings.heading_weight }};
+    --sd-sub-size: {{ section.settings.subheading_font_size }}px;
+    --sd-sub-color: {{ section.settings.subheading_color }};
+    --sd-eyebrow-size: {{ section.settings.eyebrow_font_size }}px;
+    --sd-eyebrow-color: {{ section.settings.eyebrow_color }};
+    --sd-body-size: {{ section.settings.body_font_size }}px;
+    --sd-body-color: {{ section.settings.body_color }};
+    --sd-body-line-height: {{ section.settings.body_line_height }};
+    --sd-feat-heading-size: {{ section.settings.features_heading_font_size }}px;
+    --sd-feat-heading-color: {{ section.settings.features_heading_color }};
+    --sd-feat-size: {{ section.settings.feature_font_size }}px;
+    --sd-feat-color: {{ section.settings.feature_color }};
+    --sd-feat-check-color: {{ section.settings.feature_check_color }};
+    --sd-feat-gap: {{ section.settings.feature_gap }}px;
+    --sd-aside-heading-size: {{ section.settings.aside_heading_font_size }}px;
+    --sd-aside-heading-color: {{ section.settings.aside_heading_color }};
+  "
 >
   <div class="synergy-description__layout page-width">
     {%- comment -%} ---- Left: tabs + description ---- {%- endcomment -%}
@@ -138,25 +166,14 @@
                       </span>
                     </div>
                     <p class="synergy-upsell-card__price">{{ upsell.price | money }}</p>
-                    <form
-                      method="post"
-                      action="/cart/add"
-                      class="synergy-upsell-card__form"
-                    >
+                    <form method="post" action="/cart/add" class="synergy-upsell-card__form">
                       <input type="hidden" name="id" value="{{ upsell_variant.id }}">
                       <input type="hidden" name="quantity" value="1">
-                      <button
-                        type="submit"
-                        class="synergy-upsell-card__add"
-                        {% unless upsell_variant.available %}disabled{% endunless %}
-                      >
-                        + Add to cart
-                      </button>
+                      <button type="submit" class="synergy-upsell-card__add" {% unless upsell_variant.available %}disabled{% endunless %}>+ Add to cart</button>
                     </form>
                   </div>
                 </div>
               {%- else -%}
-                {%- comment -%} Placeholder card when no product is linked {%- endcomment -%}
                 <div class="synergy-upsell-card" {{ block.shopify_attributes }}>
                   <div class="synergy-upsell-card__image">
                     {%- if block.settings.image != blank -%}
@@ -171,9 +188,7 @@
                       <div class="synergy-stars synergy-stars--sm">
                         <span class="synergy-stars__fill" style="width: {{ block.settings.rating | default: 5 | times: 20 }}%;"></span>
                       </div>
-                      <span class="synergy-upsell-card__review-count">
-                        {{ block.settings.review_count_text }}
-                      </span>
+                      <span class="synergy-upsell-card__review-count">{{ block.settings.review_count_text }}</span>
                     </div>
                     <p class="synergy-upsell-card__price">{{ block.settings.price }}</p>
                     <a href="{{ block.settings.link | default: '#' }}" class="synergy-upsell-card__add">+ Add to cart</a>
@@ -196,6 +211,28 @@
   "settings": [
     {
       "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40
+    },
+    {
+      "type": "header",
       "content": "Tabs"
     },
     {
@@ -211,8 +248,26 @@
       "default": "Description"
     },
     {
+      "type": "range",
+      "id": "tab_font_size",
+      "label": "Tab font size",
+      "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13
+    },
+    {
+      "type": "color",
+      "id": "tab_color",
+      "label": "Tab text color",
+      "default": "#6c757d"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active tab / underline color",
+      "default": "#111111"
+    },
+    {
       "type": "header",
-      "content": "Description content"
+      "content": "Description heading"
     },
     {
       "type": "text",
@@ -221,10 +276,51 @@
       "default": "BOMBER SYNERGY EDGE CORNHOLE BAGS"
     },
     {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading font size",
+      "min": 18, "max": 48, "step": 1, "unit": "px", "default": 30
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading font weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra-bold" },
+        { "value": "900", "label": "Black" }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": "Subheading / eyebrow"
+    },
+    {
       "type": "text",
       "id": "description_subheading",
       "label": "Subheading",
       "default": "BOMBER SYNERGY EDGE CORNHOLE BAGS – PROFESSIONAL DUAL-SIDED CORNHOLE BAGS WITH EDGE TECH"
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading font size",
+      "min": 10, "max": 24, "step": 1, "unit": "px", "default": 14
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#111111"
     },
     {
       "type": "text",
@@ -233,11 +329,51 @@
       "default": "OFFICIAL TOURNAMENT CORNHOLE BAGS – MADE & ENDORSED BY THE AMERICAN CORNHOLE ASSOCIATION"
     },
     {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow font size",
+      "min": 10, "max": 20, "step": 1, "unit": "px", "default": 12
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Body text"
+    },
+    {
       "type": "richtext",
       "id": "description_body",
       "label": "Description body",
       "info": "Falls back to the product.description if left blank.",
-      "default": "<p>Take your cornhole game to the next level with Bomber Synergy Edge Cornhole Bags, featuring patented <strong>EDGE Tech construction</strong> (Patent Pending) for superior control, blocking, and shot accuracy. These dual-sided, regulation-size cornhole bags are designed for both precision and speed, with a <strong>microsuede slow side</strong> for grip and a <strong>poly turbo weave fast side</strong> for smooth slides. The innovative three-piece construction creates a flatter landing surface for <strong>even weight distribution</strong>, improving shot consistency. Show off your bold style with the Bomber Synergy Edge cornhole bags, featuring a striking design that brings attitude to every toss.</p>"
+      "default": "<p>Take your cornhole game to the next level with Bomber Synergy Edge Cornhole Bags, featuring patented <strong>EDGE Tech construction</strong> (Patent Pending) for superior control, blocking, and shot accuracy.</p>"
+    },
+    {
+      "type": "range",
+      "id": "body_font_size",
+      "label": "Body font size",
+      "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "body_line_height",
+      "label": "Body line height",
+      "options": [
+        { "value": "1.4", "label": "Tight (1.4)" },
+        { "value": "1.6", "label": "Normal (1.6)" },
+        { "value": "1.7", "label": "Relaxed (1.7)" },
+        { "value": "1.9", "label": "Loose (1.9)" }
+      ],
+      "default": "1.7"
     },
     {
       "type": "header",
@@ -250,10 +386,46 @@
       "default": "KEY FEATURES:"
     },
     {
+      "type": "range",
+      "id": "features_heading_font_size",
+      "label": "Features heading font size",
+      "min": 12, "max": 30, "step": 1, "unit": "px", "default": 18
+    },
+    {
+      "type": "color",
+      "id": "features_heading_color",
+      "label": "Features heading color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "feature_font_size",
+      "label": "Feature bullet font size",
+      "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14
+    },
+    {
+      "type": "color",
+      "id": "feature_color",
+      "label": "Feature text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "feature_check_color",
+      "label": "Checkmark color",
+      "default": "#16a34a"
+    },
+    {
+      "type": "range",
+      "id": "feature_gap",
+      "label": "Spacing between features",
+      "min": 4, "max": 24, "step": 2, "unit": "px", "default": 12
+    },
+    {
       "type": "richtext",
       "id": "closing_paragraph",
       "label": "Closing paragraph",
-      "default": "<p><strong>Designed for players of all levels,</strong> Synergy Edge Cornhole Bags bring professional performance to backyard games, tournaments, and competitive play. Whether you're blocking your opponent or landing the perfect airmail shot, these innovative cornhole bags deliver precision, durability, and unmatched gameplay.</p>"
+      "default": "<p><strong>Designed for players of all levels,</strong> Synergy Edge Cornhole Bags bring professional performance to backyard games, tournaments, and competitive play.</p>"
     },
     {
       "type": "header",
@@ -270,6 +442,18 @@
       "id": "complete_your_set_heading",
       "label": "Heading",
       "default": "COMPLETE YOUR SET"
+    },
+    {
+      "type": "range",
+      "id": "aside_heading_font_size",
+      "label": "Aside heading font size",
+      "min": 14, "max": 36, "step": 1, "unit": "px", "default": 22
+    },
+    {
+      "type": "color",
+      "id": "aside_heading_color",
+      "label": "Aside heading color",
+      "default": "#111111"
     }
   ],
   "blocks": [
@@ -277,80 +461,29 @@
       "type": "feature",
       "name": "Feature bullet",
       "settings": [
-        {
-          "type": "text",
-          "id": "feature_text",
-          "label": "Feature text",
-          "default": "Officially approved cornhole bags by the American Cornhole Association (ACA)"
-        }
+        { "type": "text", "id": "feature_text", "label": "Feature text", "default": "Officially approved cornhole bags by the American Cornhole Association (ACA)" }
       ]
     },
     {
       "type": "upsell_product",
       "name": "Upsell product",
       "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        },
-        {
-          "type": "range",
-          "id": "rating",
-          "label": "Star rating",
-          "min": 0,
-          "max": 5,
-          "step": 0.1,
-          "default": 4.8
-        },
-        {
-          "type": "text",
-          "id": "review_count_text",
-          "label": "Review count text",
-          "default": "31 reviews"
-        },
-        {
-          "type": "header",
-          "content": "Fallback (if no product selected)"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title"
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Price"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        }
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "range", "id": "rating", "label": "Star rating", "min": 0, "max": 5, "step": 0.1, "default": 4.8 },
+        { "type": "text", "id": "review_count_text", "label": "Review count text", "default": "31 reviews" },
+        { "type": "header", "content": "Fallback (if no product selected)" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "price", "label": "Price" },
+        { "type": "url", "id": "link", "label": "Link" }
       ]
     },
     {
       "type": "tab",
-      "name": "Extra tab (optional)",
+      "name": "Extra tab",
       "settings": [
-        {
-          "type": "text",
-          "id": "tab_label",
-          "label": "Tab label",
-          "default": "Specs"
-        },
-        {
-          "type": "richtext",
-          "id": "tab_content",
-          "label": "Tab content",
-          "default": "<p>Add your tab content here.</p>"
-        }
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Specs" },
+        { "type": "richtext", "id": "tab_content", "label": "Tab content", "default": "<p>Add your tab content here.</p>" }
       ]
     }
   ],

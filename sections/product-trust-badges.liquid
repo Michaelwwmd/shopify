@@ -1,11 +1,24 @@
 {%- comment -%}
-  Trust badges row (3 columns: Edge Technology, ACA approved, 30 Day Satisfaction)
+  Trust badges row — fully customizable.
 {%- endcomment -%}
 
 <section
   class="synergy-badges"
   data-section-id="{{ section.id }}"
   data-section-type="product-trust-badges"
+  style="
+    --stb-bg: {{ section.settings.bg_color }};
+    --stb-padding-top: {{ section.settings.padding_top }}px;
+    --stb-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --stb-border-color: {{ section.settings.border_color }};
+    --stb-columns: {{ section.blocks.size | at_least: 1 }};
+    --stb-gap: {{ section.settings.column_gap }}px;
+    --stb-icon-size: {{ section.settings.icon_size }}px;
+    --stb-label-size: {{ section.settings.label_font_size }}px;
+    --stb-label-color: {{ section.settings.label_color }};
+    --stb-label-weight: {{ section.settings.label_weight }};
+    --stb-icon-spacing: {{ section.settings.icon_bottom_spacing }}px;
+  "
 >
   <div class="page-width">
     <div class="synergy-badges__row">
@@ -28,23 +41,28 @@
   "name": "Synergy Trust Badges",
   "tag": "section",
   "class": "section-synergy-badges",
-  "settings": [],
+  "settings": [
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 30 },
+    { "type": "color", "id": "border_color", "label": "Top / bottom border color", "default": "#e5e7eb" },
+    { "type": "range", "id": "column_gap", "label": "Column gap", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 24 },
+    { "type": "header", "content": "Icons" },
+    { "type": "range", "id": "icon_size", "label": "Icon max width", "min": 40, "max": 200, "step": 2, "unit": "px", "default": 120 },
+    { "type": "range", "id": "icon_bottom_spacing", "label": "Icon bottom spacing", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "header", "content": "Labels" },
+    { "type": "range", "id": "label_font_size", "label": "Label font size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "select", "id": "label_weight", "label": "Label font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }], "default": "800" },
+    { "type": "color", "id": "label_color", "label": "Label color", "default": "#111111" }
+  ],
   "blocks": [
     {
       "type": "badge",
       "name": "Badge",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "icon",
-          "label": "Icon"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "EDGE TECHNOLOGY"
-        }
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "label", "label": "Label", "default": "EDGE TECHNOLOGY" }
       ]
     }
   ],
