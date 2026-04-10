@@ -28,12 +28,15 @@
   color: var(--synergy-fg);
 }
 
-/* ------------ Main product layout: 2 columns ------------ */
+/* ------------ Main product layout: 2 columns (customizable) ------------ */
+.synergy-product {
+  background: var(--sp-bg, #ffffff);
+}
 .synergy-product__wrapper {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px;
-  padding: 32px 0;
+  gap: var(--sp-gap, 40px);
+  padding: var(--sp-padding-top, 32px) 0 var(--sp-padding-bottom, 32px);
   max-width: var(--synergy-max);
   margin: 0 auto;
 }
@@ -94,8 +97,8 @@
   top: 12px;
   left: 12px;
   z-index: 2;
-  background: var(--synergy-accent);
-  color: #fff;
+  background: var(--sp-badge-bg, var(--synergy-accent));
+  color: var(--sp-badge-color, #fff);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -149,9 +152,10 @@
   margin: 0;
 }
 .synergy-product__title {
-  font-size: 30px;
+  font-size: var(--sp-title-size, 30px);
   line-height: 1.15;
-  font-weight: 800;
+  font-weight: var(--sp-title-weight, 800);
+  color: var(--sp-title-color, var(--synergy-fg));
   margin: 0 0 4px;
   text-transform: uppercase;
   letter-spacing: -0.01em;
@@ -163,7 +167,7 @@
   flex-direction: column;
   gap: 4px;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--synergy-border);
+  border-bottom: 1px solid var(--sp-border-color, var(--synergy-border));
 }
 .synergy-product__sku-line {
   font-size: 12px;
@@ -178,15 +182,15 @@
   align-items: center;
   gap: 12px 20px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--synergy-border);
+  border-bottom: 1px solid var(--sp-border-color, var(--synergy-border));
 }
 .synergy-product__stock {
   margin: 0;
   font-weight: 700;
   font-size: 13px;
 }
-.synergy-product__stock--in { color: var(--synergy-success); }
-.synergy-product__stock--out { color: #c0392b; }
+.synergy-product__stock--in { color: var(--sp-stock-in-color, var(--synergy-success)); }
+.synergy-product__stock--out { color: var(--sp-stock-out-color, #c0392b); }
 
 /* Stars */
 .synergy-product__rating {
@@ -212,7 +216,7 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  color: var(--synergy-star);
+  color: var(--sp-star-color, var(--synergy-star));
   white-space: nowrap;
 }
 .synergy-stars__fill::before {
@@ -234,13 +238,13 @@
   flex-wrap: wrap;
 }
 .synergy-product__price-current {
-  font-size: 26px;
+  font-size: var(--sp-price-size, 26px);
   font-weight: 800;
-  color: var(--synergy-fg);
+  color: var(--sp-price-color, var(--synergy-fg));
 }
 .synergy-product__price-compare {
   text-decoration: line-through;
-  color: var(--synergy-muted);
+  color: var(--sp-compare-color, var(--synergy-muted));
   font-size: 18px;
 }
 .synergy-product__price-save {
@@ -259,8 +263,8 @@
   margin: 0;
 }
 .synergy-product__installments {
-  font-size: 13px;
-  color: #333;
+  font-size: var(--sp-installment-size, 13px);
+  color: var(--sp-installment-color, #333);
   margin: 4px 0 0;
   line-height: 1.4;
 }
@@ -295,8 +299,9 @@
   gap: 6px;
 }
 .synergy-product__option-label {
-  font-size: 13px;
+  font-size: var(--sp-option-label-size, 13px);
   font-weight: 600;
+  color: var(--sp-option-label-color, var(--synergy-fg));
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -310,9 +315,9 @@
   min-width: 44px;
   height: 38px;
   padding: 0 12px;
-  border: 2px solid var(--synergy-border);
+  border: 2px solid var(--sp-swatch-border-color, var(--synergy-border));
   background: #fff;
-  border-radius: var(--synergy-radius);
+  border-radius: var(--sp-swatch-radius, var(--synergy-radius));
   cursor: pointer;
   font-weight: 600;
   font-size: 13px;
@@ -326,8 +331,8 @@
   font-size: 0;
 }
 .synergy-swatch.is-active {
-  border-color: var(--synergy-accent);
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+  border-color: var(--sp-swatch-active-color, var(--synergy-fg));
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
 }
 
 /* Qty (standalone row, full width) */
@@ -344,21 +349,24 @@
 .synergy-qty-input {
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--synergy-border);
+  border: 1px solid var(--sp-border-color, var(--synergy-border));
   border-radius: var(--synergy-radius);
   overflow: hidden;
+  max-width: var(--sp-qty-width, 120px);
 }
 .synergy-qty-input__btn {
-  width: 36px;
-  height: 40px;
+  width: 32px;
+  height: var(--sp-qty-height, 40px);
   background: #f8f9fa;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
+  flex-shrink: 0;
 }
 .synergy-qty-input__field {
-  width: 48px;
-  height: 40px;
+  width: 100%;
+  min-width: 0;
+  height: var(--sp-qty-height, 40px);
   border: none;
   text-align: center;
   font-size: 15px;
@@ -376,17 +384,17 @@
   margin-top: 10px;
 }
 .synergy-product__atc {
-  background: var(--synergy-accent);
-  color: #fff;
+  background: var(--sp-atc-bg, var(--synergy-accent));
+  color: var(--sp-atc-color, #fff);
   border: none;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 16px 22px;
-  border-radius: var(--synergy-radius);
+  padding: var(--sp-atc-padding, 16px) 22px;
+  border-radius: var(--sp-atc-radius, var(--synergy-radius));
   cursor: pointer;
   text-transform: uppercase;
   width: 100%;
-  font-size: 16px;
+  font-size: var(--sp-atc-size, 16px);
   transition: background 120ms ease, transform 120ms ease;
   display: flex;
   align-items: center;
@@ -401,8 +409,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #111;
-  color: #fff;
+  background: var(--sp-ribbon-bg, #111);
+  color: var(--sp-ribbon-color, #fff);
   padding: 6px 8px 6px 10px;
   font-size: 10px;
   font-weight: 800;
@@ -425,7 +433,7 @@
 }
 .synergy-product__ribbon-close:hover { opacity: 1; }
 .synergy-product__atc:hover:not([disabled]) {
-  background: var(--synergy-accent-hover);
+  filter: brightness(0.9);
   transform: translateY(-1px);
 }
 .synergy-product__atc[disabled] {
@@ -439,7 +447,7 @@
 /* Guaranteed Safe Checkout */
 .synergy-product__safe-checkout {
   margin-top: 18px;
-  border: 1px solid var(--synergy-border);
+  border: 1px solid var(--sp-border-color, var(--synergy-border));
   border-radius: var(--synergy-radius);
   padding: 14px 16px 12px;
   text-align: center;
@@ -500,7 +508,7 @@
   gap: 12px;
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid var(--synergy-border);
+  border-top: 1px solid var(--sp-border-color, var(--synergy-border));
   font-size: 13px;
   color: var(--synergy-muted);
 }

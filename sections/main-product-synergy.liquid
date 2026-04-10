@@ -7,6 +7,41 @@
   class="synergy-product"
   data-section-id="{{ section.id }}"
   data-section-type="main-product-synergy"
+  style="
+    background-color: {{ section.settings.bg_color }};
+    --sp-bg: {{ section.settings.bg_color }};
+    --sp-padding-top: {{ section.settings.padding_top }}px;
+    --sp-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sp-gap: {{ section.settings.column_gap }}px;
+    --sp-title-size: {{ section.settings.title_font_size }}px;
+    --sp-title-color: {{ section.settings.title_color }};
+    --sp-title-weight: {{ section.settings.title_weight }};
+    --sp-price-size: {{ section.settings.price_font_size }}px;
+    --sp-price-color: {{ section.settings.price_color }};
+    --sp-compare-color: {{ section.settings.compare_price_color }};
+    --sp-installment-size: {{ section.settings.installment_font_size }}px;
+    --sp-installment-color: {{ section.settings.installment_color }};
+    --sp-star-color: {{ section.settings.star_color }};
+    --sp-stock-in-color: {{ section.settings.stock_in_color }};
+    --sp-stock-out-color: {{ section.settings.stock_out_color }};
+    --sp-option-label-size: {{ section.settings.option_label_font_size }}px;
+    --sp-option-label-color: {{ section.settings.option_label_color }};
+    --sp-swatch-border-color: {{ section.settings.swatch_border_color }};
+    --sp-swatch-active-color: {{ section.settings.swatch_active_color }};
+    --sp-swatch-radius: {{ section.settings.swatch_border_radius }}px;
+    --sp-qty-width: {{ section.settings.qty_input_width }}px;
+    --sp-qty-height: {{ section.settings.qty_input_height }}px;
+    --sp-atc-bg: {{ section.settings.atc_bg_color }};
+    --sp-atc-color: {{ section.settings.atc_text_color }};
+    --sp-atc-size: {{ section.settings.atc_font_size }}px;
+    --sp-atc-radius: {{ section.settings.atc_border_radius }}px;
+    --sp-atc-padding: {{ section.settings.atc_padding }}px;
+    --sp-ribbon-bg: {{ section.settings.ribbon_bg_color }};
+    --sp-ribbon-color: {{ section.settings.ribbon_text_color }};
+    --sp-border-color: {{ section.settings.divider_color }};
+    --sp-badge-bg: {{ section.settings.badge_bg_color }};
+    --sp-badge-color: {{ section.settings.badge_text_color }};
+  "
 >
   <div class="synergy-product__wrapper page-width">
     {%- comment -%} ---- Gallery (main image + thumbs below) ---- {%- endcomment -%}
@@ -262,38 +297,16 @@
         {%- assign share_title = product.title | url_encode -%}
         <div class="synergy-product__share">
           <span class="synergy-product__share-label">Share</span>
-          <a
-            class="synergy-product__share-link"
-            href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}"
-            target="_blank"
-            rel="noopener"
-            aria-label="Share on Facebook"
-          >
+          <a class="synergy-product__share-link" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}" target="_blank" rel="noopener" aria-label="Share on Facebook">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.4-3H13.5V8.8c0-.9.25-1.5 1.5-1.5h1.6V4.6c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.1H8v3h2.5V21h3z"/></svg>
           </a>
-          <a
-            class="synergy-product__share-link"
-            href="https://pinterest.com/pin/create/button/?url={{ share_url }}&description={{ share_title }}"
-            target="_blank"
-            rel="noopener"
-            aria-label="Share on Pinterest"
-          >
+          <a class="synergy-product__share-link" href="https://pinterest.com/pin/create/button/?url={{ share_url }}&description={{ share_title }}" target="_blank" rel="noopener" aria-label="Share on Pinterest">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9.2-.8 1.2-5.2 1.2-5.2s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.7 1.3 1.5 0 .9-.6 2.3-.9 3.6-.3 1.1.5 2 1.6 2 1.9 0 3.4-2 3.4-4.9 0-2.6-1.9-4.4-4.5-4.4-3.1 0-4.9 2.3-4.9 4.7 0 .9.4 2 .8 2.5.1.1.1.2.1.3 0 .2-.2.8-.2 1-.1.2-.2.3-.5.2-1.7-.8-2.8-3.3-2.8-5.3 0-4.3 3.1-8.2 9-8.2 4.7 0 8.4 3.4 8.4 7.9 0 4.7-3 8.5-7.1 8.5-1.4 0-2.7-.7-3.1-1.6l-.9 3.2c-.3 1.2-1.2 2.7-1.8 3.7A10 10 0 1 0 12 2z"/></svg>
           </a>
-          <a
-            class="synergy-product__share-link"
-            href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ share_title }}"
-            target="_blank"
-            rel="noopener"
-            aria-label="Share on X"
-          >
+          <a class="synergy-product__share-link" href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ share_title }}" target="_blank" rel="noopener" aria-label="Share on X">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.2 3h2.8l-6 7 7 10h-6l-4.7-6.6L6 20H3l6.4-7.5L3 3h6l4.2 6L18.2 3zm-1 15.5h1.6L7.8 4.6H6.1L17.2 18.5z"/></svg>
           </a>
-          <a
-            class="synergy-product__share-link"
-            href="mailto:?subject={{ share_title }}&body={{ share_url }}"
-            aria-label="Share by email"
-          >
+          <a class="synergy-product__share-link" href="mailto:?subject={{ share_title }}&body={{ share_url }}" aria-label="Share by email">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </a>
         </div>
@@ -308,123 +321,76 @@
   "tag": "section",
   "class": "section-synergy-product",
   "settings": [
-    {
-      "type": "header",
-      "content": "Gallery"
-    },
-    {
-      "type": "text",
-      "id": "image_badge_label",
-      "label": "Gallery badge label",
-      "info": "e.g. NEW, BEST SELLER. Leave blank to hide."
-    },
-    {
-      "type": "header",
-      "content": "Rating"
-    },
-    {
-      "type": "range",
-      "id": "review_rating",
-      "label": "Star rating",
-      "min": 0,
-      "max": 5,
-      "step": 0.1,
-      "default": 4.7
-    },
-    {
-      "type": "text",
-      "id": "review_count_text",
-      "label": "Review count text",
-      "default": "137 reviews"
-    },
-    {
-      "type": "header",
-      "content": "Price"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_installments",
-      "label": "Show Shop Pay installment messaging",
-      "default": true
-    },
-    {
-      "type": "url",
-      "id": "installment_link",
-      "label": "\"Learn more\" link"
-    },
-    {
-      "type": "header",
-      "content": "Buy box"
-    },
-    {
-      "type": "text",
-      "id": "atc_label",
-      "label": "Add to cart button label",
-      "default": "ADD TO CART"
-    },
-    {
-      "type": "text",
-      "id": "discount_ribbon_label",
-      "label": "Discount ribbon label",
-      "info": "Shown as a dismissible tag on the ATC button. Leave blank to hide.",
-      "default": "GET 20% OFF"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_payment_button",
-      "label": "Show dynamic checkout button",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "label": "Show vendor",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_sku",
-      "label": "Show SKU",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_stock",
-      "label": "Show stock status",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Safe checkout"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_safe_checkout",
-      "label": "Show Guaranteed Safe Checkout box",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "safe_checkout_label",
-      "label": "Label",
-      "default": "GUARANTEED SAFE CHECKOUT"
-    },
-    {
-      "type": "image_picker",
-      "id": "safe_checkout_icons",
-      "label": "Payment icons image (optional)",
-      "info": "A single image containing Visa / MC / Amex / Discover logos. Falls back to built-in chips."
-    },
-    {
-      "type": "header",
-      "content": "Share"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_share",
-      "label": "Show share row",
-      "default": true
-    }
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "column_gap", "label": "Column gap", "min": 10, "max": 80, "step": 2, "unit": "px", "default": 40 },
+    { "type": "color", "id": "divider_color", "label": "Divider / border color", "default": "#e5e7eb" },
+
+    { "type": "header", "content": "Gallery" },
+    { "type": "text", "id": "image_badge_label", "label": "Gallery badge label", "info": "e.g. NEW, BEST SELLER. Leave blank to hide." },
+    { "type": "color", "id": "badge_bg_color", "label": "Badge background", "default": "#007bff" },
+    { "type": "color", "id": "badge_text_color", "label": "Badge text color", "default": "#ffffff" },
+
+    { "type": "header", "content": "Title" },
+    { "type": "range", "id": "title_font_size", "label": "Title font size", "min": 18, "max": 48, "step": 1, "unit": "px", "default": 30 },
+    { "type": "select", "id": "title_weight", "label": "Title font weight", "options": [{ "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }, { "value": "900", "label": "Black" }], "default": "800" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#111111" },
+
+    { "type": "header", "content": "Price" },
+    { "type": "range", "id": "price_font_size", "label": "Price font size", "min": 16, "max": 40, "step": 1, "unit": "px", "default": 26 },
+    { "type": "color", "id": "price_color", "label": "Price color", "default": "#111111" },
+    { "type": "color", "id": "compare_price_color", "label": "Compare-at price color", "default": "#6c757d" },
+    { "type": "checkbox", "id": "enable_installments", "label": "Show Shop Pay installment messaging", "default": true },
+    { "type": "range", "id": "installment_font_size", "label": "Installment text font size", "min": 11, "max": 16, "step": 1, "unit": "px", "default": 13 },
+    { "type": "color", "id": "installment_color", "label": "Installment text color", "default": "#333333" },
+    { "type": "url", "id": "installment_link", "label": "\"Learn more\" link" },
+    { "type": "checkbox", "id": "show_sku", "label": "Show SKU", "default": true },
+
+    { "type": "header", "content": "Rating & stock" },
+    { "type": "range", "id": "review_rating", "label": "Star rating", "min": 0, "max": 5, "step": 0.1, "default": 4.7 },
+    { "type": "text", "id": "review_count_text", "label": "Review count text", "default": "137 reviews" },
+    { "type": "color", "id": "star_color", "label": "Star color", "default": "#f5a623" },
+    { "type": "checkbox", "id": "show_stock", "label": "Show stock status", "default": true },
+    { "type": "color", "id": "stock_in_color", "label": "In-stock color", "default": "#16a34a" },
+    { "type": "color", "id": "stock_out_color", "label": "Out-of-stock color", "default": "#c0392b" },
+
+    { "type": "header", "content": "Variant options" },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "range", "id": "option_label_font_size", "label": "Option label font size", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "color", "id": "option_label_color", "label": "Option label color", "default": "#111111" },
+    { "type": "color", "id": "swatch_border_color", "label": "Swatch border color", "default": "#e5e7eb" },
+    { "type": "color", "id": "swatch_active_color", "label": "Swatch active border color", "default": "#111111" },
+    { "type": "range", "id": "swatch_border_radius", "label": "Swatch border radius", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 6 },
+
+    { "type": "header", "content": "Quantity input" },
+    { "type": "range", "id": "qty_input_width", "label": "Quantity input width", "min": 80, "max": 200, "step": 2, "unit": "px", "default": 120 },
+    { "type": "range", "id": "qty_input_height", "label": "Quantity input height", "min": 30, "max": 50, "step": 1, "unit": "px", "default": 40 },
+
+    { "type": "header", "content": "Add to cart button" },
+    { "type": "text", "id": "atc_label", "label": "Button label", "default": "ADD TO CART" },
+    { "type": "color", "id": "atc_bg_color", "label": "Button background", "default": "#007bff" },
+    { "type": "color", "id": "atc_text_color", "label": "Button text color", "default": "#ffffff" },
+    { "type": "range", "id": "atc_font_size", "label": "Button font size", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "atc_border_radius", "label": "Button border radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "atc_padding", "label": "Button vertical padding", "min": 8, "max": 24, "step": 1, "unit": "px", "default": 16 },
+
+    { "type": "header", "content": "Discount ribbon" },
+    { "type": "text", "id": "discount_ribbon_label", "label": "Ribbon label", "info": "Leave blank to hide.", "default": "GET 20% OFF" },
+    { "type": "color", "id": "ribbon_bg_color", "label": "Ribbon background", "default": "#111111" },
+    { "type": "color", "id": "ribbon_text_color", "label": "Ribbon text color", "default": "#ffffff" },
+
+    { "type": "header", "content": "Dynamic checkout" },
+    { "type": "checkbox", "id": "enable_payment_button", "label": "Show dynamic checkout button", "default": false },
+
+    { "type": "header", "content": "Safe checkout" },
+    { "type": "checkbox", "id": "enable_safe_checkout", "label": "Show Guaranteed Safe Checkout box", "default": true },
+    { "type": "text", "id": "safe_checkout_label", "label": "Label", "default": "GUARANTEED SAFE CHECKOUT" },
+    { "type": "image_picker", "id": "safe_checkout_icons", "label": "Payment icons image (optional)", "info": "Falls back to built-in Visa / MC / Amex / Discover chips." },
+
+    { "type": "header", "content": "Share" },
+    { "type": "checkbox", "id": "enable_share", "label": "Show share row", "default": true }
   ],
   "presets": [
     {
