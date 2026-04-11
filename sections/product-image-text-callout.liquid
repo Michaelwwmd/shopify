@@ -1,0 +1,143 @@
+{%- comment -%}
+  Synergy Image + Text Callout
+  Two-column callout with image on one side and text/CTA on the other.
+  Fully customizable via theme editor (typography, colors, spacing).
+{%- endcomment -%}
+
+<section
+  class="synergy-callout"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-image-text-callout"
+  style="
+    background-color: {{ section.settings.bg_color }};
+    --sct-bg: {{ section.settings.bg_color }};
+    --sct-padding-top: {{ section.settings.padding_top }}px;
+    --sct-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sct-gap: {{ section.settings.column_gap }}px;
+    --sct-media-ratio: {{ section.settings.image_aspect_ratio }};
+    --sct-media-radius: {{ section.settings.image_border_radius }}px;
+    --sct-text-align: {{ section.settings.text_alignment }};
+    --sct-vertical-align: {{ section.settings.vertical_alignment }};
+    --sct-eyebrow-size: {{ section.settings.eyebrow_font_size }}px;
+    --sct-eyebrow-color: {{ section.settings.eyebrow_color }};
+    --sct-eyebrow-weight: {{ section.settings.eyebrow_weight }};
+    --sct-eyebrow-spacing: {{ section.settings.eyebrow_bottom_spacing }}px;
+    --sct-heading-size: {{ section.settings.heading_font_size }}px;
+    --sct-heading-color: {{ section.settings.heading_color }};
+    --sct-heading-weight: {{ section.settings.heading_weight }};
+    --sct-heading-spacing: {{ section.settings.heading_bottom_spacing }}px;
+    --sct-body-size: {{ section.settings.body_font_size }}px;
+    --sct-body-color: {{ section.settings.body_color }};
+    --sct-body-line-height: {{ section.settings.body_line_height }};
+    --sct-body-spacing: {{ section.settings.body_bottom_spacing }}px;
+    --sct-btn-bg: {{ section.settings.button_bg_color }};
+    --sct-btn-color: {{ section.settings.button_text_color }};
+    --sct-btn-hover: {{ section.settings.button_hover_color }};
+    --sct-btn-size: {{ section.settings.button_font_size }}px;
+    --sct-btn-radius: {{ section.settings.button_border_radius }}px;
+    --sct-btn-padding-v: {{ section.settings.button_padding_v }}px;
+    --sct-btn-padding-h: {{ section.settings.button_padding_h }}px;
+  "
+>
+  <div class="synergy-callout__container page-width">
+    <div class="synergy-callout__grid" data-flip="{{ section.settings.image_position }}">
+      <div class="synergy-callout__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 600, 800, 1000, 1200',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              alt: section.settings.heading | default: 'Callout image' | escape
+          }}
+        {%- else -%}
+          <div class="synergy-callout__placeholder"></div>
+        {%- endif -%}
+      </div>
+      <div class="synergy-callout__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="synergy-callout__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="synergy-callout__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="synergy-callout__body rte">{{ section.settings.body }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_text != blank -%}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="synergy-callout__btn"
+          >
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy Image + Text Callout",
+  "tag": "section",
+  "class": "section-synergy-callout",
+  "settings": [
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 60 },
+    { "type": "range", "id": "column_gap", "label": "Column gap", "min": 10, "max": 100, "step": 2, "unit": "px", "default": 48 },
+    { "type": "select", "id": "vertical_alignment", "label": "Vertical alignment", "options": [{ "value": "flex-start", "label": "Top" }, { "value": "center", "label": "Middle" }, { "value": "flex-end", "label": "Bottom" }], "default": "center" },
+
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image (or animated GIF)" },
+    { "type": "select", "id": "image_position", "label": "Image position", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "select", "id": "image_aspect_ratio", "label": "Image aspect ratio", "options": [{ "value": "1/1", "label": "Square (1:1)" }, { "value": "4/3", "label": "Landscape (4:3)" }, { "value": "3/4", "label": "Portrait (3:4)" }, { "value": "16/9", "label": "Widescreen (16:9)" }, { "value": "3/2", "label": "Photo (3:2)" }], "default": "4/3" },
+    { "type": "range", "id": "image_border_radius", "label": "Image border radius", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 8 },
+
+    { "type": "header", "content": "Text alignment" },
+    { "type": "select", "id": "text_alignment", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left" },
+
+    { "type": "header", "content": "Eyebrow" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "OOOH! AAAH!" },
+    { "type": "range", "id": "eyebrow_font_size", "label": "Eyebrow font size", "min": 12, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "select", "id": "eyebrow_weight", "label": "Eyebrow font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }, { "value": "900", "label": "Black" }], "default": "900" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow color", "default": "#b91c1c" },
+    { "type": "range", "id": "eyebrow_bottom_spacing", "label": "Eyebrow bottom spacing", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 12 },
+
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Razzle and dazzle the competition" },
+    { "type": "range", "id": "heading_font_size", "label": "Heading font size", "min": 16, "max": 60, "step": 1, "unit": "px", "default": 32 },
+    { "type": "select", "id": "heading_weight", "label": "Heading font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }, { "value": "900", "label": "Black" }], "default": "800" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#0f172a" },
+    { "type": "range", "id": "heading_bottom_spacing", "label": "Heading bottom spacing", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 16 },
+
+    { "type": "header", "content": "Body" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Razzle and dazzle with one of over 300 graphic designs or create your own with our customization option. Top it off with bags to match and your set will be uniquely yours.</p>" },
+    { "type": "range", "id": "body_font_size", "label": "Body font size", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "color", "id": "body_color", "label": "Body color", "default": "#44403c" },
+    { "type": "select", "id": "body_line_height", "label": "Body line height", "options": [{ "value": "1.3", "label": "Tight" }, { "value": "1.5", "label": "Normal" }, { "value": "1.6", "label": "Relaxed" }, { "value": "1.8", "label": "Loose" }], "default": "1.6" },
+    { "type": "range", "id": "body_bottom_spacing", "label": "Body bottom spacing", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 20 },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Shop All Designs" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "button_bg_color", "label": "Button background", "default": "#b91c1c" },
+    { "type": "color", "id": "button_hover_color", "label": "Button hover background", "default": "#991b1b" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#ffffff" },
+    { "type": "range", "id": "button_font_size", "label": "Button font size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "button_border_radius", "label": "Button border radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "button_padding_v", "label": "Button vertical padding", "min": 6, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "button_padding_h", "label": "Button horizontal padding", "min": 10, "max": 60, "step": 2, "unit": "px", "default": 28 }
+  ],
+  "presets": [
+    {
+      "name": "Synergy Image + Text Callout",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
