@@ -149,6 +149,26 @@
     });
   }
 
+  /* ---------- Hide Empire theme's injected safe/secure checkout heading ---------- */
+  /* Empire (and some apps) inject a large "Guaranteed Safe & Secure Checkout" element
+     inside the product form. We render our own compact label, so the parent-theme
+     version is a duplicate. This finds and hides it while leaving our label alone. */
+  function hideInjectedSafeCheckout(section) {
+    const ourLabel = section.querySelector('.synergy-product__safe-checkout-label');
+    const candidates = section.querySelectorAll('h1, h2, h3, h4, h5, h6, p, div, span, strong');
+    candidates.forEach((el) => {
+      if (el === ourLabel || el.closest('.synergy-product__safe-checkout-label')) return;
+      if (el.closest('[data-synergy-hide-injected]')) return;
+      // Only inspect leaf-ish elements to avoid flagging large wrappers like the form
+      if (el.children && el.children.length > 2) return;
+      const text = (el.textContent || '').trim().toLowerCase();
+      if (!text || text.length > 80) return;
+      if (/guaranteed\s+safe(\s*&|\s+and)?\s+secure\s+checkout/.test(text)) {
+        el.setAttribute('data-synergy-hide-injected', '');
+      }
+    });
+  }
+
   /* ---------- Init on DOM ready ---------- */
   function init() {
     document.querySelectorAll('[data-section-type="main-product-synergy"]').forEach((section) => {
@@ -156,6 +176,7 @@
       initVariantPicker(section);
       initQty(section);
       initRibbon(section);
+      hideInjectedSafeCheckout(section);
     });
     document.querySelectorAll('[data-section-type="product-description-features"]').forEach(initTabs);
   }

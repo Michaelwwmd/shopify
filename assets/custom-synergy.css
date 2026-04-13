@@ -1150,3 +1150,35 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+/* ------------------------------------------------------------------
+   Hide Empire theme's default "Guaranteed Safe & Secure Checkout"
+   trust / safe-checkout snippets within the Synergy product area.
+   We render our own compact label in .synergy-product__safe-checkout-label,
+   so any parent-theme-injected heading/badge would duplicate it.
+   Our own elements are explicitly excluded via :not(...) guards.
+   ------------------------------------------------------------------ */
+.synergy-product .trust-badges,
+.synergy-product .trust-badge,
+.synergy-product .product__trust,
+.synergy-product .product__trust-badges,
+.synergy-product .product-form__trust-badges,
+.synergy-product .product-form__trust,
+.synergy-product .product-single__trust,
+.synergy-product .product-single__trust-badges,
+.synergy-product .product-single__payment-terms:not(.synergy-product__safe-checkout),
+.synergy-product .product-form__payment-terms:not(.synergy-product__safe-checkout),
+.synergy-product .payment-terms:not(.synergy-product__safe-checkout),
+.synergy-product .safe-checkout:not([class*="synergy"]),
+.synergy-product .guaranteed-checkout,
+.synergy-product .guaranteed-safe-checkout,
+.synergy-product [class*="guaranteed-safe"]:not([class*="synergy"]),
+.synergy-product [class*="safe-and-secure"],
+.synergy-product [class*="safe_and_secure"] {
+  display: none !important;
+}
+
+/* Extra safety: elements flagged by our JS fallback */
+.synergy-product [data-synergy-hide-injected] {
+  display: none !important;
+}
