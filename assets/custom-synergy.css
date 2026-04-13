@@ -142,7 +142,7 @@
 .synergy-product__info {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: var(--sp-info-gap, 14px);
 }
 .synergy-product__vendor {
   font-size: 12px;
@@ -505,27 +505,37 @@
 .synergy-product__share {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--sp-border-color, var(--synergy-border));
-  font-size: 13px;
-  color: var(--synergy-muted);
+  flex-wrap: wrap;
+  gap: var(--sp-share-gap, 12px);
+  margin-top: var(--sp-share-top-spacing, 14px);
+  padding-top: var(--sp-share-top-spacing, 12px);
+  border-top: 1px solid var(--sp-share-border-color, var(--sp-border-color, var(--synergy-border)));
+  font-size: var(--sp-share-label-size, 13px);
+  color: var(--sp-share-label-color, var(--synergy-muted));
 }
-.synergy-product__share-label { font-weight: 600; }
+.synergy-product__share--no-border {
+  border-top: 0;
+  padding-top: 0;
+}
+.synergy-product__share-label {
+  font-weight: 600;
+  font-size: var(--sp-share-label-size, 13px);
+  color: var(--sp-share-label-color, var(--synergy-muted));
+}
 .synergy-product__share-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  color: var(--synergy-muted);
-  border-radius: 50%;
+  width: var(--sp-share-btn-size, 28px);
+  height: var(--sp-share-btn-size, 28px);
+  color: var(--sp-share-icon-color, var(--synergy-muted));
+  background: var(--sp-share-icon-bg, transparent);
+  border-radius: var(--sp-share-radius, 50%);
   transition: color 120ms ease, background 120ms ease;
 }
 .synergy-product__share-link:hover {
-  color: var(--synergy-fg);
-  background: #f2f2f2;
+  color: var(--sp-share-icon-hover-color, var(--synergy-fg));
+  background: var(--sp-share-icon-hover-bg, #f2f2f2);
 }
 
 /* ------------ Description + Complete Your Set (2-col, customizable) ------------ */
