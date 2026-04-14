@@ -1390,3 +1390,88 @@
 [data-synergy-hide-injected] {
   display: none !important;
 }
+
+/* ================================================================
+   Mobile overrides (< 990px) for remaining sections.
+   Each rule reassigns the base CSS var to its *-m counterpart so
+   every existing rule that reads the base var gets the mobile value.
+   The main product, description, and both callouts declare their own
+   mobile media queries above; this block covers the rest.
+   ================================================================ */
+@media (max-width: 990px) {
+  /* CTA Banner */
+  .synergy-cta {
+    --sc-min-height: var(--sc-min-height-m);
+    --sc-content-max: var(--sc-content-max-m);
+    --sc-heading-size: var(--sc-heading-size-m);
+    --sc-heading-spacing: var(--sc-heading-spacing-m);
+    --sc-desc-size: var(--sc-desc-size-m);
+    --sc-btn-size: var(--sc-btn-size-m);
+    --sc-btn-radius: var(--sc-btn-radius-m);
+    --sc-btn-padding-v: var(--sc-btn-padding-v-m);
+    --sc-btn-padding-h: var(--sc-btn-padding-h-m);
+  }
+
+  /* Models Grid */
+  .synergy-models {
+    --sm-padding-top: var(--sm-padding-top-m);
+    --sm-padding-bottom: var(--sm-padding-bottom-m);
+    --sm-heading-size: var(--sm-heading-size-m);
+    --sm-heading-spacing: var(--sm-heading-spacing-m);
+    --sm-columns: var(--sm-columns-m);
+    --sm-gap: var(--sm-gap-m);
+    --sm-image-radius: var(--sm-image-radius-m);
+    --sm-title-size: var(--sm-title-size-m);
+    --sm-price-size: var(--sm-price-size-m);
+  }
+
+  /* Feature Columns */
+  .synergy-features-grid {
+    --sfg-padding-top: var(--sfg-padding-top-m);
+    --sfg-padding-bottom: var(--sfg-padding-bottom-m);
+    --sfg-heading-size: var(--sfg-heading-size-m);
+    --sfg-heading-spacing: var(--sfg-heading-spacing-m);
+    --sfg-sub-size: var(--sfg-sub-size-m);
+    --sfg-sub-spacing: var(--sfg-sub-spacing-m);
+    --sfg-columns: var(--sfg-columns-m);
+    --sfg-column-gap: var(--sfg-column-gap-m);
+    --sfg-row-gap: var(--sfg-row-gap-m);
+    --sfg-image-radius: var(--sfg-image-radius-m);
+    --sfg-image-spacing: var(--sfg-image-spacing-m);
+    --sfg-title-size: var(--sfg-title-size-m);
+    --sfg-title-spacing: var(--sfg-title-spacing-m);
+    --sfg-desc-size: var(--sfg-desc-size-m);
+  }
+
+  /* Edge Banner */
+  .synergy-edge-banner {
+    --seb-padding-top: var(--seb-padding-top-m);
+    --seb-padding-bottom: var(--seb-padding-bottom-m);
+    --seb-eyebrow-size: var(--seb-eyebrow-size-m);
+    --seb-title-size: var(--seb-title-size-m);
+    --seb-title-spacing: var(--seb-title-spacing-m);
+    --seb-image-max: var(--seb-image-max-m);
+  }
+
+  /* FAQ */
+  .synergy-faq {
+    --sfaq-padding-top: var(--sfaq-padding-top-m);
+    --sfaq-padding-bottom: var(--sfaq-padding-bottom-m);
+    --sfaq-max-width: var(--sfaq-max-width-m);
+    --sfaq-heading-size: var(--sfaq-heading-size-m);
+    --sfaq-heading-spacing: var(--sfaq-heading-spacing-m);
+    --sfaq-q-size: var(--sfaq-q-size-m);
+    --sfaq-q-padding: var(--sfaq-q-padding-m);
+    --sfaq-a-size: var(--sfaq-a-size-m);
+  }
+
+  /* Trust Badges */
+  .synergy-badges {
+    --stb-padding-top: var(--stb-padding-top-m);
+    --stb-padding-bottom: var(--stb-padding-bottom-m);
+    --stb-gap: var(--stb-gap-m);
+    --stb-icon-size: var(--stb-icon-size-m);
+    --stb-icon-spacing: var(--stb-icon-spacing-m);
+    --stb-label-size: var(--stb-label-size-m);
+  }
+}

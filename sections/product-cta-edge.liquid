@@ -25,6 +25,17 @@
     --sc-btn-radius: {{ section.settings.button_border_radius }}px;
     --sc-btn-padding-v: {{ section.settings.button_padding_v }}px;
     --sc-btn-padding-h: {{ section.settings.button_padding_h }}px;
+
+    /* Mobile overrides (applied below 990px) */
+    --sc-min-height-m: {{ section.settings.min_height_m }}px;
+    --sc-content-max-m: {{ section.settings.content_max_width_m }}px;
+    --sc-heading-size-m: {{ section.settings.heading_font_size_m }}px;
+    --sc-heading-spacing-m: {{ section.settings.heading_bottom_spacing_m }}px;
+    --sc-desc-size-m: {{ section.settings.desc_font_size_m }}px;
+    --sc-btn-size-m: {{ section.settings.button_font_size_m }}px;
+    --sc-btn-radius-m: {{ section.settings.button_border_radius_m }}px;
+    --sc-btn-padding-v-m: {{ section.settings.button_padding_v_m }}px;
+    --sc-btn-padding-h-m: {{ section.settings.button_padding_h_m }}px;
   "
 >
   <div class="synergy-cta__media">
@@ -81,7 +92,18 @@
     { "type": "range", "id": "button_font_size", "label": "Button font size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 14 },
     { "type": "range", "id": "button_border_radius", "label": "Button border radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
     { "type": "range", "id": "button_padding_v", "label": "Button vertical padding", "min": 6, "max": 24, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "button_padding_h", "label": "Button horizontal padding", "min": 10, "max": 60, "step": 2, "unit": "px", "default": 30 }
+    { "type": "range", "id": "button_padding_h", "label": "Button horizontal padding", "min": 10, "max": 60, "step": 2, "unit": "px", "default": 30 },
+
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width." },
+    { "type": "range", "id": "min_height_m", "label": "Minimum height (mobile)", "min": 200, "max": 700, "step": 10, "unit": "px", "default": 320 },
+    { "type": "range", "id": "content_max_width_m", "label": "Content max width (mobile)", "min": 280, "max": 900, "step": 10, "unit": "px", "default": 600 },
+    { "type": "range", "id": "heading_font_size_m", "label": "Heading font size (mobile)", "min": 20, "max": 60, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "heading_bottom_spacing_m", "label": "Heading bottom spacing (mobile)", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "desc_font_size_m", "label": "Description font size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "button_font_size_m", "label": "Button font size (mobile)", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "button_border_radius_m", "label": "Button border radius (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "button_padding_v_m", "label": "Button vertical padding (mobile)", "min": 6, "max": 24, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "button_padding_h_m", "label": "Button horizontal padding (mobile)", "min": 10, "max": 60, "step": 2, "unit": "px", "default": 24 }
   ],
   "presets": [
     {
