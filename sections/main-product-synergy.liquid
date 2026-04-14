@@ -125,11 +125,11 @@
 
     {%- comment -%} ---- Product Info ---- {%- endcomment -%}
     <div class="synergy-product__info">
+      <h1 class="synergy-product__title">{{ product.title | upcase }}</h1>
+
       {%- if section.settings.show_vendor and product.vendor != blank -%}
         <p class="synergy-product__vendor">{{ product.vendor }}</p>
       {%- endif -%}
-
-      <h1 class="synergy-product__title">{{ product.title | upcase }}</h1>
 
       {%- comment -%} ---- Price + installments + sku ---- {%- endcomment -%}
       <div class="synergy-product__price-block">
