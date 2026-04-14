@@ -1019,6 +1019,11 @@
   position: absolute;
   inset: 0;
 }
+.synergy-cta__picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .synergy-cta__media img {
   width: 100%;
   height: 100%;
@@ -1399,8 +1404,9 @@
    The main product, description, and both callouts declare their own
    mobile media queries above; this block covers the rest.
    ================================================================ */
-@media (max-width: 990px) {
-  /* CTA Banner */
+/* CTA Banner uses its own smaller (phones-only) breakpoint so tablets
+   keep the desktop layout/background image. */
+@media (max-width: 749px) {
   .synergy-cta {
     --sc-min-height: var(--sc-min-height-m);
     --sc-content-max: var(--sc-content-max-m);
@@ -1412,7 +1418,9 @@
     --sc-btn-padding-v: var(--sc-btn-padding-v-m);
     --sc-btn-padding-h: var(--sc-btn-padding-h-m);
   }
+}
 
+@media (max-width: 990px) {
   /* Models Grid */
   .synergy-models {
     --sm-padding-top: var(--sm-padding-top-m);
