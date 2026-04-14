@@ -97,6 +97,7 @@
   "settings": [
     { "type": "header", "content": "Background" },
     { "type": "image_picker", "id": "background_image", "label": "Background image" },
+    { "type": "image_picker", "id": "background_image_mobile", "label": "Background image (mobile)", "info": "Optional. Shown below 749px. Falls back to the desktop image if left blank." },
     { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#8b0000" },
     { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 70 },
     { "type": "range", "id": "min_height", "label": "Minimum height", "min": 200, "max": 700, "step": 10, "unit": "px", "default": 420 },
@@ -126,7 +127,6 @@
     { "type": "range", "id": "button_padding_h", "label": "Button horizontal padding", "min": 10, "max": 60, "step": 2, "unit": "px", "default": 30 },
 
     { "type": "header", "content": "Mobile overrides", "info": "Applied below 749px viewport width (phones). Leave any setting at its default to keep the desktop value on mobile." },
-    { "type": "image_picker", "id": "background_image_mobile", "label": "Background image (mobile)", "info": "Optional. Shown below 749px. Falls back to the desktop image if blank." },
     { "type": "range", "id": "min_height_m", "label": "Minimum height (mobile)", "min": 200, "max": 700, "step": 10, "unit": "px", "default": 320 },
     { "type": "range", "id": "content_max_width_m", "label": "Content max width (mobile)", "min": 280, "max": 900, "step": 10, "unit": "px", "default": 600 },
     { "type": "range", "id": "heading_font_size_m", "label": "Heading font size (mobile)", "min": 20, "max": 60, "step": 1, "unit": "px", "default": 28 },
