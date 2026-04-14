@@ -1,0 +1,101 @@
+{%- comment -%}
+  Synergy Collection Marquee
+  Thin horizontal strip that scrolls a tagline across the screen. Used as a
+  decorative divider between the hero and the category chips.
+  Items come from blocks so the store owner can mix static tagline blocks.
+{%- endcomment -%}
+
+<section
+  class="synergy-marquee"
+  data-section-id="{{ section.id }}"
+  data-section-type="coll-marquee"
+  style="
+    background-color: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    --smq-bg: {{ section.settings.bg_color }};
+    --smq-color: {{ section.settings.text_color }};
+    --smq-size: {{ section.settings.font_size }}px;
+    --smq-weight: {{ section.settings.font_weight }};
+    --smq-letter: {{ section.settings.letter_spacing }}em;
+    --smq-padding-y: {{ section.settings.padding_y }}px;
+    --smq-gap: {{ section.settings.item_gap }}px;
+    --smq-speed: {{ section.settings.scroll_speed }}s;
+    --smq-separator-color: {{ section.settings.separator_color }};
+
+    /* Mobile overrides (< 990px) */
+    --smq-size-m: {{ section.settings.font_size_m }}px;
+    --smq-padding-y-m: {{ section.settings.padding_y_m }}px;
+    --smq-gap-m: {{ section.settings.item_gap_m }}px;
+    --smq-speed-m: {{ section.settings.scroll_speed_m }}s;
+  "
+>
+  <div class="synergy-marquee__track" aria-hidden="true">
+    {%- comment -%}
+      Render the list twice back-to-back so the CSS animation can loop
+      seamlessly by translating -50% on the track.
+    {%- endcomment -%}
+    {%- for pass in (1..2) -%}
+      <ul class="synergy-marquee__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'item' -%}
+            <li class="synergy-marquee__item" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Synergy Marquee",
+  "tag": "section",
+  "class": "section-synergy-marquee",
+  "settings": [
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#111111" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },
+    { "type": "color", "id": "separator_color", "label": "Separator color (between items)", "default": "#c0392b" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 14 },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "font_size", "label": "Font size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 12 },
+    { "type": "select", "id": "font_weight", "label": "Font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }], "default": "700" },
+    { "type": "range", "id": "letter_spacing", "label": "Letter spacing", "info": "em. 0.1 = 10% of the font size.", "min": 0, "max": 0.3, "step": 0.01, "default": 0.1 },
+
+    { "type": "header", "content": "Motion" },
+    { "type": "range", "id": "item_gap", "label": "Gap between items", "min": 10, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "scroll_speed", "label": "Full loop duration", "info": "Seconds for one full pass. Larger = slower.", "min": 10, "max": 120, "step": 1, "unit": "s", "default": 40 },
+
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width." },
+    { "type": "range", "id": "font_size_m", "label": "Font size (mobile)", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "padding_y_m", "label": "Vertical padding (mobile)", "min": 4, "max": 40, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "item_gap_m", "label": "Gap between items (mobile)", "min": 10, "max": 120, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "scroll_speed_m", "label": "Full loop duration (mobile)", "min": 10, "max": 120, "step": 1, "unit": "s", "default": 30 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "THE ORIGINAL AND OFFICIAL CORNHOLE BAGS BY CORNHOLE" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Synergy Marquee",
+      "category": "Collection",
+      "blocks": [
+        { "type": "item", "settings": { "text": "THE ORIGINAL AND OFFICIAL CORNHOLE BAGS BY CORNHOLE" } },
+        { "type": "item", "settings": { "text": "THE ORIGINAL AND OFFICIAL CORNHOLE BAGS BY CORNHOLE" } },
+        { "type": "item", "settings": { "text": "THE ORIGINAL AND OFFICIAL CORNHOLE BAGS BY CORNHOLE" } },
+        { "type": "item", "settings": { "text": "THE ORIGINAL AND OFFICIAL CORNHOLE BAGS BY CORNHOLE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

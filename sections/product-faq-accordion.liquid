@@ -26,6 +26,16 @@
     --sfaq-a-line-height: {{ section.settings.answer_line_height }};
     --sfaq-border-color: {{ section.settings.border_color }};
     --sfaq-icon-color: {{ section.settings.toggle_icon_color }};
+
+    /* Mobile overrides (applied below 990px) */
+    --sfaq-padding-top-m: {{ section.settings.padding_top_m }}px;
+    --sfaq-padding-bottom-m: {{ section.settings.padding_bottom_m }}px;
+    --sfaq-max-width-m: {{ section.settings.max_width_m }}px;
+    --sfaq-heading-size-m: {{ section.settings.heading_font_size_m }}px;
+    --sfaq-heading-spacing-m: {{ section.settings.heading_bottom_spacing_m }}px;
+    --sfaq-q-size-m: {{ section.settings.question_font_size_m }}px;
+    --sfaq-q-padding-m: {{ section.settings.question_padding_m }}px;
+    --sfaq-a-size-m: {{ section.settings.answer_font_size_m }}px;
   "
 >
   <div class="page-width">
@@ -85,7 +95,17 @@
     { "type": "header", "content": "Answers" },
     { "type": "range", "id": "answer_font_size", "label": "Answer font size", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 14 },
     { "type": "color", "id": "answer_color", "label": "Answer color", "default": "#444444" },
-    { "type": "select", "id": "answer_line_height", "label": "Answer line height", "options": [{ "value": "1.4", "label": "Tight" }, { "value": "1.6", "label": "Normal" }, { "value": "1.8", "label": "Relaxed" }], "default": "1.6" }
+    { "type": "select", "id": "answer_line_height", "label": "Answer line height", "options": [{ "value": "1.4", "label": "Tight" }, { "value": "1.6", "label": "Normal" }, { "value": "1.8", "label": "Relaxed" }], "default": "1.6" },
+
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width." },
+    { "type": "range", "id": "padding_top_m", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "padding_bottom_m", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "max_width_m", "label": "Content max width (mobile)", "min": 300, "max": 1200, "step": 10, "unit": "px", "default": 700 },
+    { "type": "range", "id": "heading_font_size_m", "label": "Heading font size (mobile)", "min": 18, "max": 48, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "heading_bottom_spacing_m", "label": "Heading bottom spacing (mobile)", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "question_font_size_m", "label": "Question font size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "question_padding_m", "label": "Question vertical padding (mobile)", "min": 8, "max": 30, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "answer_font_size_m", "label": "Answer font size (mobile)", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 13 }
   ],
   "blocks": [
     {

@@ -36,6 +36,20 @@
     --sd-feat-gap: {{ section.settings.feature_gap }}px;
     --sd-aside-heading-size: {{ section.settings.aside_heading_font_size }}px;
     --sd-aside-heading-color: {{ section.settings.aside_heading_color }};
+
+    /* Mobile overrides (applied below 990px) */
+    --sd-padding-top-m: {{ section.settings.padding_top_m }}px;
+    --sd-padding-bottom-m: {{ section.settings.padding_bottom_m }}px;
+    --sd-column-gap-m: {{ section.settings.column_gap_m }}px;
+    --sd-tab-size-m: {{ section.settings.tab_font_size_m }}px;
+    --sd-heading-size-m: {{ section.settings.heading_font_size_m }}px;
+    --sd-sub-size-m: {{ section.settings.subheading_font_size_m }}px;
+    --sd-eyebrow-size-m: {{ section.settings.eyebrow_font_size_m }}px;
+    --sd-body-size-m: {{ section.settings.body_font_size_m }}px;
+    --sd-feat-heading-size-m: {{ section.settings.features_heading_font_size_m }}px;
+    --sd-feat-size-m: {{ section.settings.feature_font_size_m }}px;
+    --sd-feat-gap-m: {{ section.settings.feature_gap_m }}px;
+    --sd-aside-heading-size-m: {{ section.settings.aside_heading_font_size_m }}px;
   "
 >
   <div class="synergy-description__layout page-width">
@@ -463,7 +477,21 @@
       "id": "aside_heading_color",
       "label": "Aside heading color",
       "default": "#111111"
-    }
+    },
+
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width. Defaults match desktop values." },
+    { "type": "range", "id": "padding_top_m", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom_m", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "column_gap_m", "label": "Column gap (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "tab_font_size_m", "label": "Tab font size (mobile)", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "heading_font_size_m", "label": "Heading font size (mobile)", "min": 14, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "subheading_font_size_m", "label": "Subheading font size (mobile)", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "eyebrow_font_size_m", "label": "Eyebrow font size (mobile)", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "body_font_size_m", "label": "Body font size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "features_heading_font_size_m", "label": "Features heading font size (mobile)", "min": 12, "max": 30, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "feature_font_size_m", "label": "Feature bullet font size (mobile)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "feature_gap_m", "label": "Spacing between features (mobile)", "min": 4, "max": 24, "step": 2, "unit": "px", "default": 10 },
+    { "type": "range", "id": "aside_heading_font_size_m", "label": "Aside heading font size (mobile)", "min": 14, "max": 36, "step": 1, "unit": "px", "default": 20 }
   ],
   "blocks": [
     {

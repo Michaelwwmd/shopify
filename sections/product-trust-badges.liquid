@@ -19,6 +19,14 @@
     --stb-label-color: {{ section.settings.label_color }};
     --stb-label-weight: {{ section.settings.label_weight }};
     --stb-icon-spacing: {{ section.settings.icon_bottom_spacing }}px;
+
+    /* Mobile overrides (applied below 990px) */
+    --stb-padding-top-m: {{ section.settings.padding_top_m }}px;
+    --stb-padding-bottom-m: {{ section.settings.padding_bottom_m }}px;
+    --stb-gap-m: {{ section.settings.column_gap_m }}px;
+    --stb-icon-size-m: {{ section.settings.icon_size_m }}px;
+    --stb-icon-spacing-m: {{ section.settings.icon_bottom_spacing_m }}px;
+    --stb-label-size-m: {{ section.settings.label_font_size_m }}px;
   "
 >
   <div class="page-width">
@@ -55,7 +63,15 @@
     { "type": "header", "content": "Labels" },
     { "type": "range", "id": "label_font_size", "label": "Label font size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
     { "type": "select", "id": "label_weight", "label": "Label font weight", "options": [{ "value": "400", "label": "Regular" }, { "value": "600", "label": "Semi-bold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra-bold" }], "default": "800" },
-    { "type": "color", "id": "label_color", "label": "Label color", "default": "#111111" }
+    { "type": "color", "id": "label_color", "label": "Label color", "default": "#111111" },
+
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width." },
+    { "type": "range", "id": "padding_top_m", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "padding_bottom_m", "label": "Bottom padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "column_gap_m", "label": "Column gap (mobile)", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 16 },
+    { "type": "range", "id": "icon_size_m", "label": "Icon max width (mobile)", "min": 40, "max": 200, "step": 2, "unit": "px", "default": 80 },
+    { "type": "range", "id": "icon_bottom_spacing_m", "label": "Icon bottom spacing (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "label_font_size_m", "label": "Label font size (mobile)", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 12 }
   ],
   "blocks": [
     {

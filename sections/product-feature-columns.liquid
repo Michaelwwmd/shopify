@@ -35,6 +35,22 @@
     --sfg-image-ratio: {{ section.settings.image_aspect_ratio }};
     --sfg-image-radius: {{ section.settings.image_border_radius }}px;
     --sfg-image-spacing: {{ section.settings.image_bottom_spacing }}px;
+
+    /* Mobile overrides (applied below 990px) */
+    --sfg-padding-top-m: {{ section.settings.padding_top_m }}px;
+    --sfg-padding-bottom-m: {{ section.settings.padding_bottom_m }}px;
+    --sfg-heading-size-m: {{ section.settings.heading_font_size_m }}px;
+    --sfg-heading-spacing-m: {{ section.settings.heading_bottom_spacing_m }}px;
+    --sfg-sub-size-m: {{ section.settings.subheading_font_size_m }}px;
+    --sfg-sub-spacing-m: {{ section.settings.subheading_bottom_spacing_m }}px;
+    --sfg-columns-m: {{ section.settings.columns_mobile }};
+    --sfg-column-gap-m: {{ section.settings.column_gap_m }}px;
+    --sfg-row-gap-m: {{ section.settings.row_gap_m }}px;
+    --sfg-image-radius-m: {{ section.settings.image_border_radius_m }}px;
+    --sfg-image-spacing-m: {{ section.settings.image_bottom_spacing_m }}px;
+    --sfg-title-size-m: {{ section.settings.card_title_font_size_m }}px;
+    --sfg-title-spacing-m: {{ section.settings.card_title_bottom_spacing_m }}px;
+    --sfg-desc-size-m: {{ section.settings.card_desc_font_size_m }}px;
   "
 >
   <div class="page-width">
@@ -373,7 +389,23 @@
         { "value": "1.8", "label": "Loose (1.8)" }
       ],
       "default": "1.6"
-    }
+    },
+
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width." },
+    { "type": "range", "id": "padding_top_m", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "padding_bottom_m", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "heading_font_size_m", "label": "Heading font size (mobile)", "min": 16, "max": 60, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "heading_bottom_spacing_m", "label": "Heading bottom spacing (mobile)", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 10 },
+    { "type": "range", "id": "subheading_font_size_m", "label": "Subheading font size (mobile)", "min": 11, "max": 24, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "subheading_bottom_spacing_m", "label": "Subheading bottom spacing (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "columns_mobile", "label": "Columns (mobile)", "min": 1, "max": 4, "step": 1, "default": 2 },
+    { "type": "range", "id": "column_gap_m", "label": "Column gap (mobile)", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 14 },
+    { "type": "range", "id": "row_gap_m", "label": "Row gap (mobile)", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "image_border_radius_m", "label": "Image border radius (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "image_bottom_spacing_m", "label": "Image bottom spacing (mobile)", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 10 },
+    { "type": "range", "id": "card_title_font_size_m", "label": "Card title font size (mobile)", "min": 10, "max": 30, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "card_title_bottom_spacing_m", "label": "Card title bottom spacing (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 4 },
+    { "type": "range", "id": "card_desc_font_size_m", "label": "Card description font size (mobile)", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 12 }
   ],
   "blocks": [
     {

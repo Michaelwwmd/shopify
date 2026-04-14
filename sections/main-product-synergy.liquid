@@ -60,6 +60,34 @@
     --sp-share-label-color: {{ section.settings.share_label_color }};
     --sp-share-label-size: {{ section.settings.share_label_size }}px;
     --sp-share-radius: {{ section.settings.share_button_radius }}px;
+
+    /* Mobile overrides (applied below 990px via .synergy-product media query) */
+    --sp-padding-top-m: {{ section.settings.padding_top_m }}px;
+    --sp-padding-bottom-m: {{ section.settings.padding_bottom_m }}px;
+    --sp-gap-m: {{ section.settings.column_gap_m }}px;
+    --sp-gap-after-vendor-m: {{ section.settings.vendor_bottom_spacing_m }}px;
+    --sp-gap-after-title-m: {{ section.settings.title_bottom_spacing_m }}px;
+    --sp-gap-after-price-m: {{ section.settings.price_bottom_spacing_m }}px;
+    --sp-gap-after-rating-m: {{ section.settings.rating_bottom_spacing_m }}px;
+    --sp-gap-after-options-m: {{ section.settings.options_bottom_spacing_m }}px;
+    --sp-gap-after-qty-m: {{ section.settings.qty_bottom_spacing_m }}px;
+    --sp-gap-after-atc-m: {{ section.settings.atc_bottom_spacing_m }}px;
+    --sp-title-size-m: {{ section.settings.title_font_size_m }}px;
+    --sp-price-size-m: {{ section.settings.price_font_size_m }}px;
+    --sp-installment-size-m: {{ section.settings.installment_font_size_m }}px;
+    --sp-option-label-size-m: {{ section.settings.option_label_font_size_m }}px;
+    --sp-swatch-radius-m: {{ section.settings.swatch_border_radius_m }}px;
+    --sp-qty-width-m: {{ section.settings.qty_input_width_m }}px;
+    --sp-qty-height-m: {{ section.settings.qty_input_height_m }}px;
+    --sp-atc-size-m: {{ section.settings.atc_font_size_m }}px;
+    --sp-atc-radius-m: {{ section.settings.atc_border_radius_m }}px;
+    --sp-atc-padding-m: {{ section.settings.atc_padding_m }}px;
+    --sp-share-top-spacing-m: {{ section.settings.share_top_spacing_m }}px;
+    --sp-share-icon-size-m: {{ section.settings.share_icon_size_m }}px;
+    --sp-share-btn-size-m: {{ section.settings.share_button_size_m }}px;
+    --sp-share-radius-m: {{ section.settings.share_button_radius_m }}px;
+    --sp-share-gap-m: {{ section.settings.share_gap_m }}px;
+    --sp-share-label-size-m: {{ section.settings.share_label_size_m }}px;
   "
 >
   <div class="synergy-product__wrapper page-width">
@@ -448,7 +476,35 @@
     { "type": "color", "id": "share_icon_bg_color", "label": "Icon background", "default": "#ffffff" },
     { "type": "color", "id": "share_icon_hover_bg_color", "label": "Icon hover background", "default": "#f2f2f2" },
     { "type": "color", "id": "share_label_color", "label": "Label color", "default": "#6c757d" },
-    { "type": "range", "id": "share_label_size", "label": "Label font size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 }
+    { "type": "range", "id": "share_label_size", "label": "Label font size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width. Defaults match desktop values so leaving them as-is keeps mobile identical to desktop." },
+    { "type": "range", "id": "padding_top_m", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom_m", "label": "Bottom padding (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "column_gap_m", "label": "Column gap (mobile)", "min": 10, "max": 80, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "vendor_bottom_spacing_m", "label": "Below Vendor (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 4 },
+    { "type": "range", "id": "title_bottom_spacing_m", "label": "Below Title (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "price_bottom_spacing_m", "label": "Below Price (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "rating_bottom_spacing_m", "label": "Below Rating & stock (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "options_bottom_spacing_m", "label": "Below Variant options (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "qty_bottom_spacing_m", "label": "Below Quantity (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "atc_bottom_spacing_m", "label": "Below Add to cart (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "title_font_size_m", "label": "Title font size (mobile)", "min": 14, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "price_font_size_m", "label": "Price font size (mobile)", "min": 14, "max": 40, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "installment_font_size_m", "label": "Installment text font size (mobile)", "min": 10, "max": 16, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "option_label_font_size_m", "label": "Option label font size (mobile)", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "swatch_border_radius_m", "label": "Swatch border radius (mobile)", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "qty_input_width_m", "label": "Quantity input width (mobile)", "min": 80, "max": 200, "step": 2, "unit": "px", "default": 120 },
+    { "type": "range", "id": "qty_input_height_m", "label": "Quantity input height (mobile)", "min": 30, "max": 50, "step": 1, "unit": "px", "default": 40 },
+    { "type": "range", "id": "atc_font_size_m", "label": "ATC button font size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "atc_border_radius_m", "label": "ATC border radius (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "atc_padding_m", "label": "ATC vertical padding (mobile)", "min": 8, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "share_top_spacing_m", "label": "Share row top spacing (mobile)", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "share_icon_size_m", "label": "Share icon size (mobile)", "min": 10, "max": 32, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "share_button_size_m", "label": "Share icon button size (mobile)", "min": 20, "max": 56, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "share_button_radius_m", "label": "Share icon button radius (mobile)", "min": 0, "max": 28, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "share_gap_m", "label": "Gap between share icons (mobile)", "min": 0, "max": 32, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "share_label_size_m", "label": "Share label font size (mobile)", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 }
   ],
   "presets": [
     {
