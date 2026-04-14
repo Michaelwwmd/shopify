@@ -566,7 +566,7 @@
 .synergy-description__layout {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: 40px;
+  gap: var(--sd-column-gap, 40px);
   max-width: var(--synergy-max);
   margin: 0 auto;
 }
@@ -1294,7 +1294,11 @@
   display: none !important;
 }
 
-/* Extra safety: elements flagged by our JS fallback */
-.synergy-product [data-synergy-hide-injected] {
+/* Extra safety: elements flagged by our JS fallback.
+   Not scoped to .synergy-product — the injected "Guaranteed Safe & Secure
+   Checkout" heading often lives in an Empire-theme wrapper that sits OUTSIDE
+   our section, so we rely on the data-attribute being set by JS (custom-synergy.js
+   only runs this scan when the synergy product section is on the page). */
+[data-synergy-hide-injected] {
   display: none !important;
 }

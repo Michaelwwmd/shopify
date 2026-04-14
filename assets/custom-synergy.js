@@ -150,23 +150,56 @@
   }
 
   /* ---------- Hide Empire theme's injected safe/secure checkout heading ---------- */
-  /* Empire (and some apps) inject a large "Guaranteed Safe & Secure Checkout" element
-     inside the product form. We render our own compact label, so the parent-theme
-     version is a duplicate. This finds and hides it while leaving our label alone. */
-  function hideInjectedSafeCheckout(section) {
-    const ourLabel = section.querySelector('.synergy-product__safe-checkout-label');
-    const candidates = section.querySelectorAll('h1, h2, h3, h4, h5, h6, p, div, span, strong');
-    candidates.forEach((el) => {
-      if (el === ourLabel || el.closest('.synergy-product__safe-checkout-label')) return;
-      if (el.closest('[data-synergy-hide-injected]')) return;
-      // Only inspect leaf-ish elements to avoid flagging large wrappers like the form
-      if (el.children && el.children.length > 2) return;
-      const text = (el.textContent || '').trim().toLowerCase();
-      if (!text || text.length > 80) return;
-      if (/guaranteed\s+safe(\s*&|\s+and)?\s+secure\s+checkout/.test(text)) {
-        el.setAttribute('data-synergy-hide-injected', '');
+  /* Empire (and some apps) inject a "Guaranteed Safe & Secure Checkout" heading
+     into the product page's built-in template. When used alongside our custom
+     main-product-synergy section, that heading duplicates our own compact label
+     (.synergy-product__safe-checkout-label). Our own section's text contains
+     "GUARANTEED SAFE CHECKOUT" (no "& SECURE"), so we can safely match on the
+     "& / and secure" variant and hide only the injected duplicate. */
+  var INJECTED_RE = /guaranteed\s+safe\s*(?:&|and|&amp;)\s*secure\s+checkout/i;
+
+  function hideInjectedSafeCheckout() {
+    if (!document.body) return;
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    var matches = [];
+    var node;
+    while ((node = walker.nextNode())) {
+      var text = (node.nodeValue || '').trim();
+      if (!text || text.length > 120) continue;
+      if (INJECTED_RE.test(text)) matches.push(node);
+    }
+    matches.forEach(function (textNode) {
+      var el = textNode.parentElement;
+      if (!el) return;
+      // Never hide our own label or anything inside our safe-checkout box
+      if (el.closest('.synergy-product__safe-checkout')) return;
+      if (el.hasAttribute('data-synergy-hide-injected')) return;
+      // If we landed on a tiny inline wrapper, step up to its block container
+      while (
+        el.parentElement &&
+        el.parentElement !== document.body &&
+        el.parentElement.children.length === 1 &&
+        el.parentElement.textContent.trim() === textNode.nodeValue.trim()
+      ) {
+        el = el.parentElement;
+      }
+      el.setAttribute('data-synergy-hide-injected', '');
+    });
+  }
+
+  function watchForInjectedSafeCheckout() {
+    // Some themes / apps inject after initial paint. Re-scan on DOM mutations
+    // until the first match is hidden, then disconnect.
+    if (typeof MutationObserver === 'undefined') return;
+    var observer = new MutationObserver(function () {
+      hideInjectedSafeCheckout();
+      if (document.querySelector('[data-synergy-hide-injected]')) {
+        observer.disconnect();
       }
     });
+    observer.observe(document.body, { childList: true, subtree: true });
+    // Safety stop after 8s so we don't observe forever
+    setTimeout(function () { observer.disconnect(); }, 8000);
   }
 
   /* ---------- Init on DOM ready ---------- */
@@ -176,9 +209,14 @@
       initVariantPicker(section);
       initQty(section);
       initRibbon(section);
-      hideInjectedSafeCheckout(section);
     });
     document.querySelectorAll('[data-section-type="product-description-features"]').forEach(initTabs);
+
+    // Only run the injected-text scrubber when the synergy product section is on the page
+    if (document.querySelector('[data-section-type="main-product-synergy"]')) {
+      hideInjectedSafeCheckout();
+      watchForInjectedSafeCheckout();
+    }
   }
 
   if (document.readyState === 'loading') {

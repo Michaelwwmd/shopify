@@ -13,6 +13,7 @@
     --sd-bg: {{ section.settings.bg_color }};
     --sd-padding-top: {{ section.settings.padding_top }}px;
     --sd-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --sd-column-gap: {{ section.settings.column_gap }}px;
     --sd-tab-size: {{ section.settings.tab_font_size }}px;
     --sd-tab-color: {{ section.settings.tab_color }};
     --sd-tab-active-color: {{ section.settings.tab_active_color }};
@@ -230,6 +231,13 @@
       "type": "range",
       "id": "padding_bottom",
       "label": "Bottom padding",
+      "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "info": "Horizontal space between the Description column and the Complete Your Set column.",
       "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40
     },
     {
