@@ -45,6 +45,37 @@
     grid-template-columns: 1fr;
     gap: 28px;
   }
+  /* Mobile overrides for main product section:
+     Reassign base CSS vars to their *-m counterparts so every existing
+     rule that already reads the base var picks up the mobile value. */
+  .synergy-product {
+    --sp-padding-top: var(--sp-padding-top-m);
+    --sp-padding-bottom: var(--sp-padding-bottom-m);
+    --sp-gap: var(--sp-gap-m);
+    --sp-gap-after-vendor: var(--sp-gap-after-vendor-m);
+    --sp-gap-after-title: var(--sp-gap-after-title-m);
+    --sp-gap-after-price: var(--sp-gap-after-price-m);
+    --sp-gap-after-rating: var(--sp-gap-after-rating-m);
+    --sp-gap-after-options: var(--sp-gap-after-options-m);
+    --sp-gap-after-qty: var(--sp-gap-after-qty-m);
+    --sp-gap-after-atc: var(--sp-gap-after-atc-m);
+    --sp-title-size: var(--sp-title-size-m);
+    --sp-price-size: var(--sp-price-size-m);
+    --sp-installment-size: var(--sp-installment-size-m);
+    --sp-option-label-size: var(--sp-option-label-size-m);
+    --sp-swatch-radius: var(--sp-swatch-radius-m);
+    --sp-qty-width: var(--sp-qty-width-m);
+    --sp-qty-height: var(--sp-qty-height-m);
+    --sp-atc-size: var(--sp-atc-size-m);
+    --sp-atc-radius: var(--sp-atc-radius-m);
+    --sp-atc-padding: var(--sp-atc-padding-m);
+    --sp-share-top-spacing: var(--sp-share-top-spacing-m);
+    --sp-share-icon-size: var(--sp-share-icon-size-m);
+    --sp-share-btn-size: var(--sp-share-btn-size-m);
+    --sp-share-radius: var(--sp-share-radius-m);
+    --sp-share-gap: var(--sp-share-gap-m);
+    --sp-share-label-size: var(--sp-share-label-size-m);
+  }
 }
 
 /* Gallery: stage on top, horizontal thumbs below */
@@ -556,6 +587,10 @@
 .synergy-product__share-link:hover {
   color: var(--sp-share-icon-hover-color, var(--synergy-fg));
   background: var(--sp-share-icon-hover-bg, #f2f2f2);
+}
+.synergy-product__share-link svg {
+  width: var(--sp-share-icon-size, 16px);
+  height: var(--sp-share-icon-size, 16px);
 }
 
 /* ------------ Description + Complete Your Set (2-col, customizable) ------------ */
