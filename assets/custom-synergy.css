@@ -566,7 +566,7 @@
 .synergy-description__layout {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: 40px;
+  gap: var(--sd-column-gap, 40px);
   max-width: var(--synergy-max);
   margin: 0 auto;
 }
