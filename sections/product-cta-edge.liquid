@@ -40,8 +40,37 @@
   "
 >
   <div class="synergy-cta__media">
-    {%- if section.settings.background_image != blank -%}
-      {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: section.settings.heading | escape }}
+    {%- if section.settings.background_image != blank or section.settings.background_image_mobile != blank -%}
+      <picture class="synergy-cta__picture">
+        {%- if section.settings.background_image_mobile != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ section.settings.background_image_mobile | image_url: width: 900 }} 900w, {{ section.settings.background_image_mobile | image_url: width: 1400 }} 1400w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {%- if section.settings.background_image != blank -%}
+          {{
+            section.settings.background_image
+            | image_url: width: 2000
+            | image_tag:
+              loading: 'lazy',
+              widths: '900, 1200, 1600, 2000',
+              sizes: '100vw',
+              alt: section.settings.heading | escape
+          }}
+        {%- elsif section.settings.background_image_mobile != blank -%}
+          {{
+            section.settings.background_image_mobile
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              widths: '600, 900, 1200, 1400',
+              sizes: '100vw',
+              alt: section.settings.heading | escape
+          }}
+        {%- endif -%}
+      </picture>
     {%- endif -%}
     <div class="synergy-cta__overlay"></div>
   </div>
@@ -96,7 +125,8 @@
     { "type": "range", "id": "button_padding_v", "label": "Button vertical padding", "min": 6, "max": 24, "step": 1, "unit": "px", "default": 14 },
     { "type": "range", "id": "button_padding_h", "label": "Button horizontal padding", "min": 10, "max": 60, "step": 2, "unit": "px", "default": 30 },
 
-    { "type": "header", "content": "Mobile overrides", "info": "Applied below 990px viewport width." },
+    { "type": "header", "content": "Mobile overrides", "info": "Applied below 749px viewport width (phones). Leave any setting at its default to keep the desktop value on mobile." },
+    { "type": "image_picker", "id": "background_image_mobile", "label": "Background image (mobile)", "info": "Optional. Shown below 749px. Falls back to the desktop image if blank." },
     { "type": "range", "id": "min_height_m", "label": "Minimum height (mobile)", "min": 200, "max": 700, "step": 10, "unit": "px", "default": 320 },
     { "type": "range", "id": "content_max_width_m", "label": "Content max width (mobile)", "min": 280, "max": 900, "step": 10, "unit": "px", "default": 600 },
     { "type": "range", "id": "heading_font_size_m", "label": "Heading font size (mobile)", "min": 20, "max": 60, "step": 1, "unit": "px", "default": 28 },
