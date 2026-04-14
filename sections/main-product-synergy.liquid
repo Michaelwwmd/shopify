@@ -41,7 +41,12 @@
     --sp-border-color: {{ section.settings.divider_color }};
     --sp-badge-bg: {{ section.settings.badge_bg_color }};
     --sp-badge-color: {{ section.settings.badge_text_color }};
-    --sp-info-gap: {{ section.settings.info_row_gap }}px;
+    --sp-gap-after-title: {{ section.settings.title_bottom_spacing }}px;
+    --sp-gap-after-price: {{ section.settings.price_bottom_spacing }}px;
+    --sp-gap-after-rating: {{ section.settings.rating_bottom_spacing }}px;
+    --sp-gap-after-options: {{ section.settings.options_bottom_spacing }}px;
+    --sp-gap-after-qty: {{ section.settings.qty_bottom_spacing }}px;
+    --sp-gap-after-atc: {{ section.settings.atc_bottom_spacing }}px;
     --sp-share-top-spacing: {{ section.settings.share_top_spacing }}px;
     --sp-share-gap: {{ section.settings.share_gap }}px;
     --sp-share-btn-size: {{ section.settings.share_button_size }}px;
@@ -349,8 +354,15 @@
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 32 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 32 },
     { "type": "range", "id": "column_gap", "label": "Column gap", "min": 10, "max": 80, "step": 2, "unit": "px", "default": 40 },
-    { "type": "range", "id": "info_row_gap", "label": "Spacing between info rows", "info": "Controls the vertical gap between Title, Price, Rating, Options, Quantity, Add to cart, etc.", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
     { "type": "color", "id": "divider_color", "label": "Divider / border color", "default": "#e5e7eb" },
+
+    { "type": "header", "content": "Info row spacing", "info": "Vertical gap below each item on the right-hand info column." },
+    { "type": "range", "id": "title_bottom_spacing", "label": "Below Title", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "price_bottom_spacing", "label": "Below Price", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "rating_bottom_spacing", "label": "Below Rating & stock", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "options_bottom_spacing", "label": "Below Variant options", "info": "Also controls gap between multiple variant option rows.", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "qty_bottom_spacing", "label": "Below Quantity", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "atc_bottom_spacing", "label": "Below Add to cart", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 18 },
 
     { "type": "header", "content": "Gallery" },
     { "type": "text", "id": "image_badge_label", "label": "Gallery badge label", "info": "e.g. NEW, BEST SELLER. Leave blank to hide." },
