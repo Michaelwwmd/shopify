@@ -610,6 +610,21 @@
     grid-template-columns: 1fr;
     gap: 32px;
   }
+  /* Mobile overrides for description section */
+  .synergy-description {
+    --sd-padding-top: var(--sd-padding-top-m);
+    --sd-padding-bottom: var(--sd-padding-bottom-m);
+    --sd-column-gap: var(--sd-column-gap-m);
+    --sd-tab-size: var(--sd-tab-size-m);
+    --sd-heading-size: var(--sd-heading-size-m);
+    --sd-sub-size: var(--sd-sub-size-m);
+    --sd-eyebrow-size: var(--sd-eyebrow-size-m);
+    --sd-body-size: var(--sd-body-size-m);
+    --sd-feat-heading-size: var(--sd-feat-heading-size-m);
+    --sd-feat-size: var(--sd-feat-size-m);
+    --sd-feat-gap: var(--sd-feat-gap-m);
+    --sd-aside-heading-size: var(--sd-aside-heading-size-m);
+  }
 }
 
 .synergy-tabs {
@@ -1149,6 +1164,25 @@
     order: 0;
   }
 }
+@media (max-width: 990px) {
+  /* Mobile overrides for Synergy Image + Text Callout */
+  .synergy-callout {
+    --sct-padding-top: var(--sct-padding-top-m);
+    --sct-padding-bottom: var(--sct-padding-bottom-m);
+    --sct-gap: var(--sct-gap-m);
+    --sct-media-radius: var(--sct-media-radius-m);
+    --sct-eyebrow-size: var(--sct-eyebrow-size-m);
+    --sct-eyebrow-spacing: var(--sct-eyebrow-spacing-m);
+    --sct-heading-size: var(--sct-heading-size-m);
+    --sct-heading-spacing: var(--sct-heading-spacing-m);
+    --sct-body-size: var(--sct-body-size-m);
+    --sct-body-spacing: var(--sct-body-spacing-m);
+    --sct-btn-size: var(--sct-btn-size-m);
+    --sct-btn-radius: var(--sct-btn-radius-m);
+    --sct-btn-padding-v: var(--sct-btn-padding-v-m);
+    --sct-btn-padding-h: var(--sct-btn-padding-h-m);
+  }
+}
 .synergy-callout__media {
   border-radius: var(--sct-media-radius, 8px);
   overflow: hidden;
@@ -1233,6 +1267,25 @@
   }
   .synergy-callout-2__grid[data-flip="right"] .synergy-callout-2__media {
     order: 0;
+  }
+}
+@media (max-width: 990px) {
+  /* Mobile overrides for Synergy Image + Text Callout 2 */
+  .synergy-callout-2 {
+    --sct2-padding-top: var(--sct2-padding-top-m);
+    --sct2-padding-bottom: var(--sct2-padding-bottom-m);
+    --sct2-gap: var(--sct2-gap-m);
+    --sct2-media-radius: var(--sct2-media-radius-m);
+    --sct2-eyebrow-size: var(--sct2-eyebrow-size-m);
+    --sct2-eyebrow-spacing: var(--sct2-eyebrow-spacing-m);
+    --sct2-heading-size: var(--sct2-heading-size-m);
+    --sct2-heading-spacing: var(--sct2-heading-spacing-m);
+    --sct2-body-size: var(--sct2-body-size-m);
+    --sct2-body-spacing: var(--sct2-body-spacing-m);
+    --sct2-btn-size: var(--sct2-btn-size-m);
+    --sct2-btn-radius: var(--sct2-btn-radius-m);
+    --sct2-btn-padding-v: var(--sct2-btn-padding-v-m);
+    --sct2-btn-padding-h: var(--sct2-btn-padding-h-m);
   }
 }
 .synergy-callout-2__media {
