@@ -458,7 +458,6 @@
   transform: translateY(-1px);
 }
 .synergy-product__atc[disabled] {
-  opacity: 0.55;
   cursor: not-allowed;
 }
 .synergy-product__dynamic-checkout {
