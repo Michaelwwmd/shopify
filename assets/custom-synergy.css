@@ -144,14 +144,13 @@
   flex-direction: column;
   gap: 0;
 }
-/* Gap after Title applies to whichever row follows (vendor or price) */
-.synergy-product__title + .synergy-product__vendor,
-.synergy-product__title + .synergy-product__price-block {
-  margin-top: var(--sp-gap-after-title, 14px);
+/* Gap below Vendor (only relevant when Show vendor is on) */
+.synergy-product__vendor + .synergy-product__title {
+  margin-top: var(--sp-gap-after-vendor, 4px);
 }
-/* When vendor sits between title and price, price hugs the vendor line */
-.synergy-product__vendor + .synergy-product__price-block {
-  margin-top: 4px;
+/* Gap below Title */
+.synergy-product__price-block {
+  margin-top: var(--sp-gap-after-title, 14px);
 }
 .synergy-product__rating-stock {
   margin-top: var(--sp-gap-after-price, 14px);
