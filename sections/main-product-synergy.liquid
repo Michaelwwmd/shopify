@@ -41,6 +41,7 @@
     --sp-border-color: {{ section.settings.divider_color }};
     --sp-badge-bg: {{ section.settings.badge_bg_color }};
     --sp-badge-color: {{ section.settings.badge_text_color }};
+    --sp-gap-after-vendor: {{ section.settings.vendor_bottom_spacing }}px;
     --sp-gap-after-title: {{ section.settings.title_bottom_spacing }}px;
     --sp-gap-after-price: {{ section.settings.price_bottom_spacing }}px;
     --sp-gap-after-rating: {{ section.settings.rating_bottom_spacing }}px;
@@ -125,11 +126,11 @@
 
     {%- comment -%} ---- Product Info ---- {%- endcomment -%}
     <div class="synergy-product__info">
-      <h1 class="synergy-product__title">{{ product.title | upcase }}</h1>
-
       {%- if section.settings.show_vendor and product.vendor != blank -%}
         <p class="synergy-product__vendor">{{ product.vendor }}</p>
       {%- endif -%}
+
+      <h1 class="synergy-product__title">{{ product.title | upcase }}</h1>
 
       {%- comment -%} ---- Price + installments + sku ---- {%- endcomment -%}
       <div class="synergy-product__price-block">
@@ -357,6 +358,7 @@
     { "type": "color", "id": "divider_color", "label": "Divider / border color", "default": "#e5e7eb" },
 
     { "type": "header", "content": "Info row spacing", "info": "Vertical gap below each item on the right-hand info column." },
+    { "type": "range", "id": "vendor_bottom_spacing", "label": "Below Vendor", "info": "Only applies when Show vendor is enabled.", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 4 },
     { "type": "range", "id": "title_bottom_spacing", "label": "Below Title", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
     { "type": "range", "id": "price_bottom_spacing", "label": "Below Price", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
     { "type": "range", "id": "rating_bottom_spacing", "label": "Below Rating & stock", "min": 0, "max": 60, "step": 1, "unit": "px", "default": 14 },
