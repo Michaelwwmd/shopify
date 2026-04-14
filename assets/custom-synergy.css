@@ -138,11 +138,35 @@
   object-fit: contain;
 }
 
-/* Info */
+/* Info — individual per-row spacing below each item */
 .synergy-product__info {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0;
+}
+/* Gap after Title applies to whichever row follows (vendor or price) */
+.synergy-product__title + .synergy-product__vendor,
+.synergy-product__title + .synergy-product__price-block {
+  margin-top: var(--sp-gap-after-title, 14px);
+}
+/* When vendor sits between title and price, price hugs the vendor line */
+.synergy-product__vendor + .synergy-product__price-block {
+  margin-top: 4px;
+}
+.synergy-product__rating-stock {
+  margin-top: var(--sp-gap-after-price, 14px);
+}
+.synergy-product__form {
+  margin-top: var(--sp-gap-after-rating, 14px);
+}
+.synergy-product__option + .synergy-product__option {
+  margin-top: var(--sp-gap-after-options, 14px);
+}
+.synergy-product__form .synergy-product__qty-wrapper {
+  margin-top: var(--sp-gap-after-options, 14px);
+}
+.synergy-product__form .synergy-product__atc-wrapper {
+  margin-top: var(--sp-gap-after-qty, 14px);
 }
 .synergy-product__vendor {
   font-size: 12px;
@@ -340,7 +364,6 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 6px;
 }
 .synergy-product__qty-label {
   font-size: 13px;
@@ -381,7 +404,6 @@
 /* ATC wrapper w/ ribbon */
 .synergy-product__atc-wrapper {
   position: relative;
-  margin-top: 10px;
 }
 .synergy-product__atc {
   background: var(--sp-atc-bg, var(--synergy-accent));
@@ -446,7 +468,7 @@
 
 /* Guaranteed Safe Checkout */
 .synergy-product__safe-checkout {
-  margin-top: 18px;
+  margin-top: var(--sp-gap-after-atc, 18px);
   border: 1px solid var(--sp-border-color, var(--synergy-border));
   border-radius: var(--synergy-radius);
   padding: 14px 16px 12px;
@@ -505,27 +527,37 @@
 .synergy-product__share {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--sp-border-color, var(--synergy-border));
-  font-size: 13px;
-  color: var(--synergy-muted);
+  flex-wrap: wrap;
+  gap: var(--sp-share-gap, 12px);
+  margin-top: var(--sp-share-top-spacing, 14px);
+  padding-top: var(--sp-share-top-spacing, 12px);
+  border-top: 1px solid var(--sp-share-border-color, var(--sp-border-color, var(--synergy-border)));
+  font-size: var(--sp-share-label-size, 13px);
+  color: var(--sp-share-label-color, var(--synergy-muted));
 }
-.synergy-product__share-label { font-weight: 600; }
+.synergy-product__share--no-border {
+  border-top: 0;
+  padding-top: 0;
+}
+.synergy-product__share-label {
+  font-weight: 600;
+  font-size: var(--sp-share-label-size, 13px);
+  color: var(--sp-share-label-color, var(--synergy-muted));
+}
 .synergy-product__share-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  color: var(--synergy-muted);
-  border-radius: 50%;
+  width: var(--sp-share-btn-size, 28px);
+  height: var(--sp-share-btn-size, 28px);
+  color: var(--sp-share-icon-color, var(--synergy-muted));
+  background: var(--sp-share-icon-bg, transparent);
+  border-radius: var(--sp-share-radius, 50%);
   transition: color 120ms ease, background 120ms ease;
 }
 .synergy-product__share-link:hover {
-  color: var(--synergy-fg);
-  background: #f2f2f2;
+  color: var(--sp-share-icon-hover-color, var(--synergy-fg));
+  background: var(--sp-share-icon-hover-bg, #f2f2f2);
 }
 
 /* ------------ Description + Complete Your Set (2-col, customizable) ------------ */
@@ -1149,4 +1181,36 @@
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+/* ------------------------------------------------------------------
+   Hide Empire theme's default "Guaranteed Safe & Secure Checkout"
+   trust / safe-checkout snippets within the Synergy product area.
+   We render our own compact label in .synergy-product__safe-checkout-label,
+   so any parent-theme-injected heading/badge would duplicate it.
+   Our own elements are explicitly excluded via :not(...) guards.
+   ------------------------------------------------------------------ */
+.synergy-product .trust-badges,
+.synergy-product .trust-badge,
+.synergy-product .product__trust,
+.synergy-product .product__trust-badges,
+.synergy-product .product-form__trust-badges,
+.synergy-product .product-form__trust,
+.synergy-product .product-single__trust,
+.synergy-product .product-single__trust-badges,
+.synergy-product .product-single__payment-terms:not(.synergy-product__safe-checkout),
+.synergy-product .product-form__payment-terms:not(.synergy-product__safe-checkout),
+.synergy-product .payment-terms:not(.synergy-product__safe-checkout),
+.synergy-product .safe-checkout:not([class*="synergy"]),
+.synergy-product .guaranteed-checkout,
+.synergy-product .guaranteed-safe-checkout,
+.synergy-product [class*="guaranteed-safe"]:not([class*="synergy"]),
+.synergy-product [class*="safe-and-secure"],
+.synergy-product [class*="safe_and_secure"] {
+  display: none !important;
+}
+
+/* Extra safety: elements flagged by our JS fallback */
+.synergy-product [data-synergy-hide-injected] {
+  display: none !important;
 }
