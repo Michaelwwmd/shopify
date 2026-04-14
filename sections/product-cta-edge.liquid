@@ -11,6 +11,7 @@
     --sc-overlay-color: {{ section.settings.overlay_color }};
     --sc-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
     --sc-content-align: {{ section.settings.content_alignment }};
+    --sc-text-align: {{ section.settings.text_alignment }};
     --sc-content-max: {{ section.settings.content_max_width }}px;
     --sc-heading-size: {{ section.settings.heading_font_size }}px;
     --sc-heading-color: {{ section.settings.heading_color }};
@@ -71,7 +72,8 @@
     { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 70 },
     { "type": "range", "id": "min_height", "label": "Minimum height", "min": 200, "max": 700, "step": 10, "unit": "px", "default": 420 },
     { "type": "header", "content": "Content layout" },
-    { "type": "select", "id": "content_alignment", "label": "Content alignment", "options": [{ "value": "flex-start", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "flex-end", "label": "Right" }], "default": "flex-start" },
+    { "type": "select", "id": "content_alignment", "label": "Content block position", "info": "Where the text block sits horizontally inside the banner.", "options": [{ "value": "flex-start", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "flex-end", "label": "Right" }], "default": "flex-start" },
+    { "type": "select", "id": "text_alignment", "label": "Text alignment", "info": "Horizontal alignment of the heading, description, and button.", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left" },
     { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 300, "max": 900, "step": 10, "unit": "px", "default": 720 },
     { "type": "header", "content": "Heading" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "GET AN EDGE OVER THE COMPETITION" },
